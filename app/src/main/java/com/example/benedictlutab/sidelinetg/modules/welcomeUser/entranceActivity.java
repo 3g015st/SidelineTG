@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.modules.login.loginActivity;
+import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import butterknife.BindView;
@@ -64,11 +65,12 @@ public class entranceActivity extends AppCompatActivity
         switch(view.getId())
         {
             case R.id.btnLogin:
-                Intent intent = new Intent(entranceActivity.this, loginActivity.class);
-                startActivity(intent);
+                Intent intent_login = new Intent(entranceActivity.this, loginActivity.class);
+                startActivity(intent_login);
                 break;
             case R.id.btnSignup:
-
+                Intent intent_su = new Intent(entranceActivity.this, signupActivity.class);
+                startActivity(intent_su);
                 break;
         }
     }
