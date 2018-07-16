@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_mainbg"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.login.loginActivity">
+
+    <ImageView
+        android:layout_width="310dp"
+        android:layout_height="290dp"
+        android:background="@drawable/img_logo_only"/>
+
+    <!--Email Address-->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#bdbdbd"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:hint="Email Address"
+            android:textColor="#eeeeee"
+            android:backgroundTint="@color/colorAccent"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!--Password-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#bdbdbd"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="40dp"
+            android:hint="Password"
+            android:textColor="#eeeeee"
+            android:backgroundTint="@color/colorAccent"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="330dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="CONTINUE"
+        android:textColor="#eeeeee"
+        android:textSize="18sp"
+        android:background="@drawable/main_btn_bg"/>
+
+    <!--Recover Account-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Have you forgotten your password?"
+        android:textColor="#eeeeee"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etRecoverAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorAccent"
+        android:enabled="true"
+        android:cursorVisible="false"
+        android:text="Recover Account"
+        android:textColor="#ffffff"
+        android:textSize="13sp" />
+
+
+</LinearLayout>
