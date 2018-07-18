@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,12 +140,15 @@ public class signupActivity extends AppCompatActivity
         int selectedGender = rdgGender.getCheckedRadioButtonId();
         rdbSelectedGender = findViewById(selectedGender);
         Gender = rdbSelectedGender.getText().toString();
+        Log.e("Fetch Gender: ", Gender);
     }
 
     private void signupUser()
     {
         boolean ERROR_COUNT = false;
         validationUtil validationUtil = new validationUtil();
+
+        fetchSelectedGender();
 
         // Validate fields before passing data to REST API.
         if(!validationUtil.isValidEmail(etEmail))
@@ -155,6 +159,7 @@ public class signupActivity extends AppCompatActivity
         if(!validationUtil.isValidPassword(etPassword))
         {
             etPassword.setError("Invalid password pattern");
+            ERROR_COUNT = true;
         }
         if(validationUtil.isEmpty(etFirstName))
         {
@@ -163,7 +168,7 @@ public class signupActivity extends AppCompatActivity
         }
         if(validationUtil.isEmpty(etLastName))
         {
-            etLastName.setError("Input your last name");
+            etLastName.setError("Input your last name ");
             ERROR_COUNT = true;
         }
         if(validationUtil.isEmpty(etBirthdate))
@@ -173,7 +178,7 @@ public class signupActivity extends AppCompatActivity
         }
         if(validationUtil.isEmpty(etAL1))
         {
-            etBirthdate.setError("Input your address line 1");
+            etAL1.setError("Input your address line 1");
             ERROR_COUNT = true;
         }
         if(!validationUtil.isValidCity(actvCity, cities))
@@ -186,12 +191,12 @@ public class signupActivity extends AppCompatActivity
             // Submit information
             submitInfo();
         }
+
     }
 
     private void submitInfo()
     {
-        fetchSelectedGender();
-
+        Log.e("submitInfo:", "STARTED!");
         // Get route obj.
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
@@ -215,8 +220,10 @@ public class signupActivity extends AppCompatActivity
                     {
                         case "SUCCESS":
                         {
+                            Intent intent = new Intent(signupActivity.this, accountKitActivity.class);
                             // If email does not exist, pass data to next activity.
-                            TastyToast.makeText(getApplicationContext(), "Email does not exists", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+
+                            startActivity(intent);
                             break;
                         }
                         case "ERROR":

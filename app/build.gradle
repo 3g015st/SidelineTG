@@ -39,4 +39,6 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     // TastyToast
     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+    //FB Account Kit
+    implementation 'com.facebook.android:account-kit-sdk:4.+'
 }

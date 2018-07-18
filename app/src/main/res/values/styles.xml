@@ -21,4 +21,6 @@
         <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
 
+    <!--FB Account Kit-->
+    <style name="AppLoginTheme" parent="Theme.AccountKit" />
 </resources>
