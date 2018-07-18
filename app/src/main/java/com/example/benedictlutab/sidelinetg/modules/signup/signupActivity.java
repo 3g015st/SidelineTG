@@ -221,8 +221,20 @@ public class signupActivity extends AppCompatActivity
                         case "SUCCESS":
                         {
                             Intent intent = new Intent(signupActivity.this, accountKitActivity.class);
-                            // If email does not exist, pass data to next activity.
 
+                            // If email does not exist, pass data to next activity.
+                            Log.e("Passed data: ", etFirstName.getText().toString());
+                            intent.putExtra("first_name", etFirstName.getText().toString());
+                            intent.putExtra("last_name", etLastName.getText().toString());
+                            intent.putExtra("gender", Gender);
+                            intent.putExtra("birthdate", etBirthdate.getText().toString());
+                            intent.putExtra("email", etEmail.getText().toString());
+                            intent.putExtra("password", etPassword.getText().toString());
+                            intent.putExtra("role", ROLE);
+                            intent.putExtra("line_one", etAL1.getText().toString());
+                            intent.putExtra("city", actvCity.getText().toString());
+
+                            finish();
                             startActivity(intent);
                             break;
                         }
@@ -230,6 +242,12 @@ public class signupActivity extends AppCompatActivity
                         {
                             // If email already exists, try again.
                             TastyToast.makeText(getApplicationContext(), "Email does exists", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                            break;
+                        }
+                        default:
+                        {
+                            TastyToast.makeText(getApplicationContext(), "Network Error", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                            break;
                         }
                     }
                     }
@@ -240,7 +258,7 @@ public class signupActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError volleyError)
                     {
                         // Showing error message if something goes wrong.
-                        Log.d("Error Response:", volleyError.toString());
+                        Log.e("Error Response:", volleyError.toString());
                     }
                 })
         {

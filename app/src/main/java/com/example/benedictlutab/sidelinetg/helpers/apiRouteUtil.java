@@ -11,6 +11,6 @@ public class apiRouteUtil
 
     // Routes
     public String URL_CHECK_EMAIL_EXISTS = DOMAIN + "/api/taskgiver/isEmailExists.php";
-    public String URL_SIGNUP             = DOMAIN + "/api/taskgiver/signup.php";
+    public String URL_SIGNUP             = DOMAIN + "/api/taskgiver/createUserAccount.php";
     public String URL_LOGIN              = DOMAIN + "/api/common/login.php";
 }
