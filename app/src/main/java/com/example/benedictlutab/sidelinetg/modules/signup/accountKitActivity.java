@@ -71,6 +71,14 @@ public class accountKitActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(accountKitActivity.this, entranceActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void createUserAccount()
     {
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>()
@@ -88,7 +96,6 @@ public class accountKitActivity extends AppCompatActivity
                     sendUserCredentials();
                 }
             }
-
             @Override
             public void onError(final AccountKitError error)
             {

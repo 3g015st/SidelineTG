@@ -40,7 +40,7 @@
         android:layout_height="60dp"
         android:layout_marginBottom="100dp"
         android:textSize="20sp"
-        android:text="Signup"
+        android:text="Sign up"
         android:textColor="#eeeeee"
         android:background="@drawable/welcomeuser_btnsignup_bg"/>
 

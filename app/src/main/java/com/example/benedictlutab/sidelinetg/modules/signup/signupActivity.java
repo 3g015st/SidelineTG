@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -53,6 +54,7 @@ public class signupActivity extends AppCompatActivity
     private RadioButton rdbSelectedGender;
 
     @BindView(R.id.actvCity) AutoCompleteTextView actvCity;
+    @BindView(R.id.btnBack) Button btnBack;
     @BindView(R.id.etEmail) EditText etEmail;
     @BindView(R.id.etPassword) EditText etPassword;
     @BindView(R.id.etFirstName) EditText etFirstName;
@@ -94,7 +96,7 @@ public class signupActivity extends AppCompatActivity
         loadCities();
     }
 
-    @OnClick({R.id.etBirthdate, R.id.btnSubmit})
+    @OnClick({R.id.etBirthdate, R.id.btnSubmit, R.id.btnBack})
     public void setViewOnClickEvent(View view)
     {
         switch(view.getId())
@@ -104,6 +106,9 @@ public class signupActivity extends AppCompatActivity
                 break;
             case R.id.btnSubmit:
                 signupUser();
+                break;
+            case R.id.btnBack:
+                this.finish();
                 break;
         }
     }
