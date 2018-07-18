@@ -23,4 +23,9 @@
 
     <!--FB Account Kit-->
     <style name="AppLoginTheme" parent="Theme.AccountKit" />
+
+    <!--Bottom Nav Style-->
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/ralewayregular</item>
+    </style>
 </resources>

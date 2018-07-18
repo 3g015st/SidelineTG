@@ -21,6 +21,7 @@ import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.modules.signup.accountKitActivity;
 import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
+import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
 import com.example.benedictlutab.sidelinetg.modules.welcomeUser.entranceActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -115,6 +116,9 @@ public class loginActivity extends AppCompatActivity
                                 editor.apply();
 
                                 // Go to homeActivity
+                                Intent intent = new Intent(loginActivity.this, homeActivity.class);
+                                finish();
+                                startActivity(intent);
                                 Log.e("loginUser:", "SUCCESS!" + message);
                             }
 
