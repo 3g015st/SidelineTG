@@ -4,4 +4,5 @@
     <!--FB Account Kit-->
     <string name="FACEBOOK_APP_ID">212721209583168</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">dfbfb97f45991d17f585a0b7133273d5</string>
+
 </resources>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.benedictlutab.sidelinetg.R;
+import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.taskCategoryFragment;
 
 public class homeActivity extends AppCompatActivity
 {
@@ -29,16 +30,18 @@ public class homeActivity extends AppCompatActivity
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 switch (item.getItemId())
                 {
-
+                    case R.id.action_post_task:
+                        fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, taskCategoryFragment.newInstance()).commit();
+                        break;
                 }
                 return true;
             }
         });
 
-        //Manually displaying the first fragment - one time only
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frmlayout_fragment, PostTaskFragment.newInstance());
-//        transaction.commit();
+        // Manually displaying the first fragment - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frmlayout_fragment, taskCategoryFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
