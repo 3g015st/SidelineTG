@@ -37,7 +37,7 @@ public class homeActivity extends AppCompatActivity
 
         //Manually displaying the first fragment - one time only
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frm_layout_fragment, PostTaskFragment.newInstance());
+//        transaction.replace(R.id.frmlayout_fragment, PostTaskFragment.newInstance());
 //        transaction.commit();
     }
 

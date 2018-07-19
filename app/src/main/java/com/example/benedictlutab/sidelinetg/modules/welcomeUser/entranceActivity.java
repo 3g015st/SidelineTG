@@ -2,11 +2,14 @@ package com.example.benedictlutab.sidelinetg.modules.welcomeUser;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -16,14 +19,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
+import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.modules.login.loginActivity;
 import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
+import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.sdsmdg.tastytoast.TastyToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +52,8 @@ public class entranceActivity extends AppCompatActivity
     @BindView(R.id.etTerms) EditText etTerms;
     @BindView(R.id.btnLogin) Button btnLogin;
     @BindView(R.id.btnSignup) Button btnSignup;
+
+    private String REQUEST = "CHECK_CONN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +85,8 @@ public class entranceActivity extends AppCompatActivity
                     })
                     .show();
         }
+        else
+            {checkServerConnection();}
     }
 
     @OnClick({R.id.btnLogin, R.id.btnSignup, R.id.etTerms})
@@ -101,4 +123,80 @@ public class entranceActivity extends AppCompatActivity
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
+
+    private void checkServerConnection()
+    {
+        Log.e("checkServerConn:", "START!");
+        // Disable buttons first.
+        btnLogin.setEnabled(false);
+        btnSignup.setEnabled(false);
+
+        // Get route obj.
+        apiRouteUtil apiRouteUtil = new apiRouteUtil();
+
+        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_CHECK_CONNECTION,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String ServerResponse)
+                    {
+                        // Showing response message coming from server.
+                        Log.e("RESPONSE: ", ServerResponse);
+
+                        // If there is no connection to server,
+                        if(ServerResponse.equals("ERROR"))
+                        {
+                           showNetworkError();
+                        }
+                        else
+                        {
+                            // Enable buttons
+                            btnLogin.setEnabled(true);
+                            btnSignup.setEnabled(true);
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        // Showing error message if something goes wrong.
+                        Log.e("Error Response:", volleyError.toString());
+                        showNetworkError();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+                // Sending all registration fields to 'Parameter'.
+                Parameter.put("request", REQUEST);
+                return Parameter;
+            }
+        };
+        // Initialize requestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(entranceActivity.this);
+        // Send the StringRequest to the requestQueue.
+        requestQueue.add(StringRequest);
+    }
+
+    private void showNetworkError()
+    {
+        Log.e("showNetworkError:", "START!");
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Network Error").setContentText("It seems there is a problem in our servers please try again later :(")
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+                {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        // Exit application.
+                        finish();
+                    }
+                })
+                .show();
+    }
 }
+
