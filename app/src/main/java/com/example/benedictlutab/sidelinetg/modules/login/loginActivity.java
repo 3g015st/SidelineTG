@@ -3,7 +3,9 @@ package com.example.benedictlutab.sidelinetg.modules.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,8 @@ public class loginActivity extends AppCompatActivity
     @BindView(R.id.etRecoverAccount) EditText etRecoverAccount;
     @BindView(R.id.etEmail) EditText etEmail;
     @BindView(R.id.etPassword) EditText etPassword;
+    @BindView(R.id.tilEmail) TextInputLayout tilEmail;
+    @BindView(R.id.tilPassword) TextInputLayout tilPassword;
 
     private String ROLE = "Task Giver";
     private String message, response_code;
@@ -57,6 +61,10 @@ public class loginActivity extends AppCompatActivity
         // Change Font Style.
         fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/ralewayRegular.ttf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
+
+        // Change Hint Font Style.
+        tilEmail.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
+        tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
 
         // Make uneditable.
         etRecoverAccount.setFocusable(false);

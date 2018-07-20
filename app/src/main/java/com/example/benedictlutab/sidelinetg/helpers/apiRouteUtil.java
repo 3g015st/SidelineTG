@@ -8,6 +8,8 @@ public class apiRouteUtil
 {
     // Set domain
     public String DOMAIN = "http://192.168.1.5/";
+//      public String DOMAIN = "http://192.168.1.7/";
+//    public String DOMAIN = "http://192.168.43.218/";
 
     // Routes
     public String URL_CHECK_EMAIL_EXISTS    = DOMAIN + "api/taskgiver/isEmailExists.php";

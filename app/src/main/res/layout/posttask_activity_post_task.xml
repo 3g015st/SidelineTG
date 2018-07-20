@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBGSecondary"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.postTaskActivity">
+
+    <!--App Bar/Title Bar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryLight"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_img_back" />
+
+            <TextView
+                android:id="@+id/tvTaskCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Task Category"
+                android:textAllCaps="true"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--MAIN-->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--DETAILS TITLE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorBGPrimary">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/main_drw_l_lbl_details"
+                    android:text="DETAILS"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorFontPrimary"/>
+            </LinearLayout>
+
+            <!--DETAILS CONTENT-->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--Title-->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTaskTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#bdbdbd"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="30"
+                    app:counterOverflowTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter.Exceed"
+                    app:counterTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter">
+                    <EditText
+                        android:id="@+id/etTaskTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="TITLE"
+                        android:textColor="#eeeeee"
+                        android:textSize="15dp"
+                        android:inputType="textFilter"
+                        android:maxLength="60"
+                        android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
+                <!--Description-->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:textColorHint="#bdbdbd"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="50"
+                    app:counterOverflowTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter.Exceed"
+                    app:counterTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter">
+                    <EditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="DESCRIPTION"
+                        android:textColor="#eeeeee"
+                        android:textSize="15dp"
+                        android:inputType="textMultiLine|textFilter"
+                        android:maxLength="80"
+                        android:lines="3"
+                        android:maxLines="3"/>
+                </android.support.design.widget.TextInputLayout>
+                <!--ATTACH IMGS-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15dp"
+                    android:text="ATTACH IMAGES"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/ivImageOne"
+                        android:layout_margin="10dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/posttask_attach_img_bubble"/>
+                    <ImageView
+                        android:id="@+id/ivImageTwo"
+                        android:layout_margin="10dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/posttask_attach_img_bubble"/>
+                </LinearLayout>
+                <!--Task date-->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTaskDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#bdbdbd"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+                    <EditText
+                        android:id="@+id/etTaskDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="TASK DATE"
+                        android:textColor="#eeeeee"
+                        android:textSize="15dp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <!--LOCATION TITLE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorBGPrimary">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/main_drw_l_lbl_home"
+                    android:text="LOCATION"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorFontPrimary"/>
+            </LinearLayout>
+            <!--Address-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilTaskAddress"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#bdbdbd"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/etTaskAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:hint="ADDRESS"
+                    android:textColor="#eeeeee"
+                    android:textSize="15dp"
+                    android:maxLength="60"
+                    android:singleLine="true"/>
+            </android.support.design.widget.TextInputLayout>
+            <!--LOCATION TITLE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorBGPrimary">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/main_drw_l_lbl_cc"
+                    android:text="PAYMENT"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorFontPrimary"/>
+            </LinearLayout>
+            <!--Budget/Amount-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilTaskPayment"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#bdbdbd"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/etTaskPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:hint="WHAT'S YOUR BUDGET?"
+                    android:textColor="#eeeeee"
+                    android:textSize="15dp"
+                    android:maxLength="6"
+                    android:singleLine="true"/>
+            </android.support.design.widget.TextInputLayout>
+        <!--POST TASK!-->
+            <Button
+                android:id="@+id/btnPost"
+                android:layout_gravity="center"
+                android:layout_width="370dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="30dp"
+                android:text="POST THE TASK"
+                android:textColor="#eeeeee"
+                android:textSize="18sp"
+                android:background="@drawable/main_btn_bg"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -45,7 +45,8 @@
         <activity android:name=".modules.login.loginActivity" />
         <activity android:name=".modules.signup.signupActivity" />
         <activity android:name=".modules.signup.accountKitActivity" />
-        <activity android:name=".modules.viewHome.homeActivity"></activity>
+        <activity android:name=".modules.viewHome.homeActivity" />
+        <activity android:name=".modules.viewHome.postTask.postTaskActivity"></activity>
     </application>
 
 </manifest>

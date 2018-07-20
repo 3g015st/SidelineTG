@@ -1,6 +1,7 @@
 package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +60,12 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
 
         // Bind data.
         holder.ID = taskCategory.getTask_category_id();
-        holder.tvTaskTitle.setText(taskCategory.getName());
+
+        holder.TASK_CATEGORY_NAME = taskCategory.getName();
+        holder.tvTaskTitle.setText(holder.TASK_CATEGORY_NAME);
+
+        holder.MINIMUM_PAYMENT = taskCategory.getMinimum_payment();
+
         holder.IMAGE_URL = apiRouteUtil.DOMAIN + "api" + taskCategory.getTask_category_img();
         Log.e("IMAGE URL: ", holder.IMAGE_URL);
 
@@ -72,6 +78,7 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
             public void onClick(View v)
             {
                 Log.e("TASK CATEG ID:", holder.ID);
+                goToPostATask(holder.ID, holder.TASK_CATEGORY_NAME, holder.MINIMUM_PAYMENT);
             }
         });
     }
@@ -88,12 +95,21 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
         @BindView(R.id.tvTaskTitle) TextView tvTaskTitle;
         @BindView(R.id.ivTaskCategoryImage) ImageView ivTaskCategoryImage;
 
-        private String IMAGE_URL, ID;
+        private String MINIMUM_PAYMENT, IMAGE_URL, ID, TASK_CATEGORY_NAME;
 
         public ViewHolder(View itemView)
         {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    private void goToPostATask(String TASK_CATEGORY_ID, String TASK_CATEGORY_NAME, String MINIMUM_PAYMENT)
+    {
+        Intent intent = new Intent(context, postTaskActivity.class);
+        intent.putExtra("TASK_CATEGORY_ID", TASK_CATEGORY_ID);
+        intent.putExtra("TASK_CATEGORY_NAME", TASK_CATEGORY_NAME);
+        intent.putExtra("MINIMUM_PAYMENT", MINIMUM_PAYMENT);
+        context.startActivity(intent);
     }
 }
