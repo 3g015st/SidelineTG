@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -32,6 +34,16 @@
             tools:replace="android:theme" />
         <!-- FB Account Kit (END) -->
 
+        <!--Google Maps (START)-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAdOtuVu6-IUSVygGQQtYoCfe49zrunfuM" />
+        <!--Google Maps (END)-->
+
         <activity
             android:name=".modules.welcomeUser.entranceActivity"
             android:configChanges="orientation"
@@ -46,7 +58,8 @@
         <activity android:name=".modules.signup.signupActivity" />
         <activity android:name=".modules.signup.accountKitActivity" />
         <activity android:name=".modules.viewHome.homeActivity" />
-        <activity android:name=".modules.viewHome.postTask.postTaskActivity"></activity>
+        <activity android:name=".modules.viewHome.postTask.postTaskActivity" />
+        <activity android:name=".modules.viewHome.postTask.setTaskLocation.googleMapsActivity"></activity>
     </application>
 
 </manifest>

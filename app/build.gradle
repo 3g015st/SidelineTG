@@ -46,4 +46,10 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     //Picasso Image Library
     implementation 'com.squareup.picasso:picasso:2.5.0'
+    //Google Play Services - MAPS
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    //Google Play Services - LOCATION
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    //Google Play Services - PLACES
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
 }

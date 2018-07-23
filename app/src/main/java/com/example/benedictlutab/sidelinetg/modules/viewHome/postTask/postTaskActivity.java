@@ -2,7 +2,10 @@ package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +32,9 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
 import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
+import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.setTaskLocation.googleMapsActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.io.FileNotFoundException;
@@ -64,10 +70,18 @@ public class postTaskActivity extends AppCompatActivity
     @BindView(R.id.ivImageOne) ImageView ivImageOne;
     @BindView(R.id.ivImageTwo) ImageView ivImageTwo;
 
-    private String TASK_CATEGORY_ID, TASK_CATEGORY_NAME;
-    private int REQUEST_CODE_IMG_ONE = 100, REQUEST_CODE_IMG_TWO = 200;
+    private String TASK_CATEGORY_ID, TASK_CATEGORY_NAME, USER_ID;
+    private final static int REQUEST_CODE_IMG_ONE = 150, REQUEST_CODE_IMG_TWO = 250;
     private float MINIMUM_PAYMENT;
+
+    private final static int REQUEST_GOOGLE_ERROR_DIALOG = 300;
+    private final static int REQUEST_SET_ADDRESS = 400;
+
     private DatePickerDialog.OnDateSetListener DateSetListener;
+
+    private SharedPreferences sharedPreferences;
+
+    private String line_one, city, latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,6 +92,14 @@ public class postTaskActivity extends AppCompatActivity
 
         fetchPassedValues();
         changeFontFamily();
+
+        // Get USER_ID
+        sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+        if (sharedPreferences.contains("USER_ID"))
+        {
+            USER_ID = sharedPreferences.getString("USER_ID", "");
+            Log.e("USER_ID:", USER_ID);
+        }
 
         // Make uneditable.
         etTaskAddress.setFocusable(false);
@@ -105,11 +127,19 @@ public class postTaskActivity extends AppCompatActivity
         };
     }
 
-    @OnClick({R.id.ivImageOne, R.id.ivImageTwo, R.id.etTaskDate, R.id.btnBack, R.id.btnPost})
+    @OnClick({R.id.ivImageOne, R.id.ivImageTwo, R.id.etTaskDate, R.id.btnBack, R.id.btnPost, R.id.etTaskAddress})
     public void setViewOnClickEvent(View view)
     {
         switch(view.getId())
         {
+            case R.id.etTaskAddress:
+                if(isGoogleServicesOk())
+                {
+                    // Go to maps activity.
+                    Intent intent = new Intent(postTaskActivity.this, googleMapsActivity.class);
+                    startActivityForResult(intent, REQUEST_SET_ADDRESS);
+                }
+                break;
             case R.id.ivImageOne:
                 // Send request to upload image from gallery.
                 ActivityCompat.requestPermissions(postTaskActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_IMG_ONE);
@@ -132,22 +162,38 @@ public class postTaskActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {
-        switch(requestCode)
+        if(requestCode == REQUEST_CODE_IMG_ONE)
         {
-            case 100:
-            case 200:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                {
-                    Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType("image/*");
-                    startActivityForResult(Intent.createChooser(intent, "Select Image"), requestCode);
-                }
-                else
-                {
-                    TastyToast.makeText(getApplicationContext(), "You don't have permission to access gallery!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-                }
-                return;
+            Log.e("oRP-REQ-CODE: ", Integer.toString(requestCode));
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), requestCode);
+            }
+            else
+            {
+                TastyToast.makeText(getApplicationContext(), "You don't have permission to access gallery!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+            }
+            return;
         }
+        else if(requestCode == REQUEST_CODE_IMG_TWO)
+        {
+            Log.e("oRP-REQ-CODE: ", Integer.toString(requestCode));
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), requestCode);
+            }
+            else
+            {
+                TastyToast.makeText(getApplicationContext(), "You don't have permission to access gallery!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+            }
+            return;
+        }
+        else
+            Log.e("oRP-REQ-CODE: ", Integer.toString(requestCode));
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -155,39 +201,97 @@ public class postTaskActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        switch(requestCode)
+        if(requestCode == REQUEST_CODE_IMG_ONE)
         {
-            case 100:
-            case 200:
-                if(resultCode == RESULT_OK && data != null)
+            Log.e("oAR-REQ-CODE: ", Integer.toString(requestCode));
+            if(resultCode == RESULT_OK && data != null)
+            {
+                Uri filePath = data.getData();
+                try
                 {
-                    Uri filePath = data.getData();
-                    try
-                    {
-                        InputStream inputStream = getContentResolver().openInputStream(filePath);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        setImage(bitmap, requestCode);
-                    }
-                    catch(FileNotFoundException ex)
-                    {
-                        Log.e("onActivityResult: ", ex.toString());
-                    }
+                    InputStream inputStream = getContentResolver().openInputStream(filePath);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    setImage(bitmap, requestCode);
                 }
+                catch(FileNotFoundException ex)
+                {
+                    Log.e("onActivityResult: ", ex.toString());
+                }
+            }
         }
+        else if(requestCode == REQUEST_CODE_IMG_TWO)
+        {
+            Log.e("oAR-REQ-CODE: ", Integer.toString(requestCode));
+            if(resultCode == RESULT_OK && data != null)
+            {
+                Uri filePath = data.getData();
+                try
+                {
+                    InputStream inputStream = getContentResolver().openInputStream(filePath);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    setImage(bitmap, requestCode);
+                }
+                catch(FileNotFoundException ex)
+                {
+                    Log.e("onActivityResult: ", ex.toString());
+                }
+            }
+        }
+        else if(requestCode == REQUEST_SET_ADDRESS)
+        {
+            Log.e("oAR-REQ-CODE: ", Integer.toString(requestCode));
+            if(resultCode == RESULT_OK && data != null)
+            {
+                // Get address information
+                line_one = data.getStringExtra("line_one");
+                city     = data.getStringExtra("city");
+                latitude = data.getStringExtra("latitude");
+                longitude = data.getStringExtra("longitude");
+
+                etTaskAddress.setText(line_one);
+            }
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setImage(Bitmap bitmap, int requestCode)
     {
-        switch(requestCode)
+        if(requestCode == REQUEST_CODE_IMG_ONE)
         {
-            case 100:
-                ivImageOne.setImageBitmap(bitmap);
-                break;
-            case 200:
-                ivImageTwo.setImageBitmap(bitmap);
-                break;
+            ivImageOne.setImageBitmap(bitmap);
         }
+        else if(requestCode == REQUEST_CODE_IMG_TWO)
+        {
+            ivImageTwo.setImageBitmap(bitmap);
+        }
+
+    }
+
+    public boolean isGoogleServicesOk()
+    {
+        Log.e("isServicesOK:", "STARTED!");
+
+        int AVAILABLE = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(postTaskActivity.this);
+
+        if(AVAILABLE == ConnectionResult.SUCCESS)
+        {
+            // The user can make map requests
+            Log.e("isServicesOK:", "IT'S WORKING :)!");
+            return true;
+        }
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(AVAILABLE))
+        {
+            // Can resolve the error.
+            Log.e("isServicesOK:", "ERROR OCCURED BUT CAN BE FIXED :)!");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(postTaskActivity.this, AVAILABLE, REQUEST_GOOGLE_ERROR_DIALOG);
+            dialog.show();
+        }
+        else
+        {
+            TastyToast.makeText(getApplicationContext(), "You cannot make map requests :(", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+        }
+        return false;
     }
 
     private void fetchPassedValues()
@@ -239,7 +343,6 @@ public class postTaskActivity extends AppCompatActivity
         cal.set(Calendar.MILLISECOND,cal.getActualMaximum(Calendar.MILLISECOND));
         return cal.getTimeInMillis();
     }
-
 
     private void submitTask()
     {

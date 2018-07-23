@@ -1,5 +1,6 @@
 package com.example.benedictlutab.sidelinetg.modules.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -48,6 +49,7 @@ public class loginActivity extends AppCompatActivity
     @BindView(R.id.tilPassword) TextInputLayout tilPassword;
 
     private String ROLE = "Task Giver";
+    private SharedPreferences sharedPreferences;
     private String message, response_code;
 
     @Override
@@ -105,8 +107,8 @@ public class loginActivity extends AppCompatActivity
                             for(int x = 0; x < jsonArray.length(); x++)
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
-                                message          = jsonObject.getString("message");
-                                response_code    = jsonObject.getString("response_code");
+                                message               = jsonObject.getString("message");
+                                response_code         = jsonObject.getString("response_code");
 
                                 Log.e("Fetch jsonArray:", message + response_code);
                             }
@@ -121,11 +123,10 @@ public class loginActivity extends AppCompatActivity
                             }
                             else if(response_code.equals("SUCCESS"))
                             {
-                                // Store USER_ID to SharedPreferences
-                                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("USER_ID", message);
-                                editor.apply();
+                                editor.commit();
 
                                 // Go to homeActivity
                                 Intent intent = new Intent(loginActivity.this, homeActivity.class);
