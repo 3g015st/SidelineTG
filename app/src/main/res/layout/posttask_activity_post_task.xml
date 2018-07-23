@@ -237,8 +237,9 @@
                     android:backgroundTint="@color/colorAccent"
                     android:hint="WHAT'S YOUR BUDGET?"
                     android:textColor="#eeeeee"
+                    android:inputType="numberDecimal"
                     android:textSize="15dp"
-                    android:maxLength="6"
+                    android:maxLength="10"
                     android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
         <!--POST TASK!-->

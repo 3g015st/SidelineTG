@@ -160,14 +160,6 @@ public class accountKitActivity extends AppCompatActivity
                                 TastyToast.makeText(getApplicationContext(), "Account creation failed!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
                                 break;
                             }
-                            default:
-                            {
-                                Intent entranceIntent = new Intent(accountKitActivity.this, entranceActivity.class);
-                                startActivity(entranceIntent);
-                                finish();
-                                TastyToast.makeText(getApplicationContext(), "Network Error!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-                                break;
-                            }
                         }
                     }
                 },

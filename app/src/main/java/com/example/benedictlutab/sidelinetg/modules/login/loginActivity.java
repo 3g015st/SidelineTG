@@ -55,9 +55,16 @@ public class loginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_login);
-
         ButterKnife.bind(this);
 
+        changeFontFamily();
+
+        // Make uneditable.
+        etRecoverAccount.setFocusable(false);
+    }
+
+    private void changeFontFamily()
+    {
         // Change Font Style.
         fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/ralewayRegular.ttf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
@@ -65,9 +72,6 @@ public class loginActivity extends AppCompatActivity
         // Change Hint Font Style.
         tilEmail.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
         tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-
-        // Make uneditable.
-        etRecoverAccount.setFocusable(false);
     }
 
     @OnClick(R.id.btnLogin)

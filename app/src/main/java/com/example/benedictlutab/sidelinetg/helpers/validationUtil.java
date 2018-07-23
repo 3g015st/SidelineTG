@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 public class validationUtil
 {
+    // General Validations
     public boolean isValidEmail(EditText text)
     {
         CharSequence email =  text.getText().toString();
@@ -63,5 +64,47 @@ public class validationUtil
         List<String> cityList = Arrays.asList(cities);
 
         return (cityList.contains(city));
+    }
+
+    // Post a Task Validations
+    public boolean isValidTaskTitle(EditText text)
+    {
+        String title = text.getText().toString();
+
+        if(title.length() < 30)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public boolean isValidTaskDescription(EditText text)
+    {
+        String description = text.getText().toString();
+
+        if(description.length() < 50)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public boolean isValidTaskPayment(EditText text, float minimumPayment)
+    {
+        float payment = 0.0f;
+
+        if(!text.getText().toString().isEmpty())
+        {
+            payment = Float.parseFloat(text.getText().toString());
+        }
+
+        if(payment < minimumPayment)
+        {
+            return false;
+        }
+        else
+            return true;
     }
 }

@@ -46,7 +46,7 @@ public class signupActivity extends AppCompatActivity
     // Store cities in an array.
     private String[] cities = {"Caloocan", "Las Piñas", "Makati", "Malabon", "Manila",
                                "Mandaluyong", "Marikina", "Valenzuela", "Taguig", "San Juan",
-                                "Quezon","Pateros","Pasig","Pasay","Parañaque"};
+                                "Quezon","Pateros","Navotas","Pasig","Pasay","Parañaque"};
 
     private final String ROLE = "Task Giver";
     private String Gender;
@@ -128,7 +128,6 @@ public class signupActivity extends AppCompatActivity
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
-
 
     private void loadCities()
     {
