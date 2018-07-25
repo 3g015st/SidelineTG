@@ -252,6 +252,9 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
     private void moveCamera(LatLng latLng, float zoom)
     {
         Log.e("moveCamera: ", String.valueOf(latLng.latitude)+" , "+String.valueOf(latLng.longitude));
+
+        mMap.clear();
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
         // Add marker, drop pin to the location.
@@ -349,6 +352,8 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     private void confirmLocation()
     {
+        trimLineOne();
+
         Intent returnIntent = new Intent();
         returnIntent.putExtra("line_one",line_one);
         returnIntent.putExtra("city",city);
@@ -356,6 +361,17 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
         returnIntent.putExtra("longitude",longitude);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    private void trimLineOne()
+    {
+        Log.e("trimPH: ", "START!");
+
+        String regex_ph = "\\s*\\b, Philippines\\b\\s*";
+        line_one = line_one.replaceAll(regex_ph, "");
+
+        String regex_mm = "\\s*\\b, Metro Manila\\b\\s*";
+        line_one = line_one.replaceAll(regex_mm, "");
     }
 
     private void hideKeyboard()

@@ -12,13 +12,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,21 +28,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
+import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
-import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.setTaskLocation.googleMapsActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,6 +89,7 @@ public class postTaskActivity extends AppCompatActivity
     private SharedPreferences sharedPreferences;
 
     private String line_one, city, latitude, longitude;
+    private Bitmap bitmap_one, bitmap_two;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -210,8 +218,8 @@ public class postTaskActivity extends AppCompatActivity
                 try
                 {
                     InputStream inputStream = getContentResolver().openInputStream(filePath);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    setImage(bitmap, requestCode);
+                    bitmap_one = BitmapFactory.decodeStream(inputStream);
+                    setImage(bitmap_one, requestCode);
                 }
                 catch(FileNotFoundException ex)
                 {
@@ -228,8 +236,8 @@ public class postTaskActivity extends AppCompatActivity
                 try
                 {
                     InputStream inputStream = getContentResolver().openInputStream(filePath);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    setImage(bitmap, requestCode);
+                    bitmap_two = BitmapFactory.decodeStream(inputStream);
+                    setImage(bitmap_two, requestCode);
                 }
                 catch(FileNotFoundException ex)
                 {
@@ -265,7 +273,16 @@ public class postTaskActivity extends AppCompatActivity
         {
             ivImageTwo.setImageBitmap(bitmap);
         }
+    }
 
+    private String imageToString(Bitmap bitmap)
+    {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     public boolean isGoogleServicesOk()
@@ -387,6 +404,63 @@ public class postTaskActivity extends AppCompatActivity
 
     private void sendRequest()
     {
+        Log.e("sendRequest: ", "START!");
+        // Get route obj.
+        apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
+        // Init loading dialog.
+        final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        swalDialog.setTitleText("");
+        swalDialog.setCancelable(false);
+
+        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_POST_TASK,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String ServerResponse)
+                    {
+                        // Showing response message coming from server.
+                        Log.e("RESPONSE: ", ServerResponse);
+                        swalDialog.hide();
+                        TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        // Showing error message if something goes wrong.
+                        swalDialog.hide();
+                        Log.e("Error Response:", volleyError.toString());
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+
+                // Sending all fields to 'Parameter'.
+                String imageOneData = imageToString(bitmap_one);
+                String imageTwoData = imageToString(bitmap_two);
+
+                Parameter.put("image_one", imageOneData);
+                Parameter.put("image_two", imageTwoData);
+
+                return Parameter;
+            }
+        };
+        // Initialize requestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(postTaskActivity.this);
+
+        // Send the StringRequest to the requestQueue.
+        requestQueue.add(StringRequest);
+
+        // Display progress dialog.
+        swalDialog.show();
     }
 }
+

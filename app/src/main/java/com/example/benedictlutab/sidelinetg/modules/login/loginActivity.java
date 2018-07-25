@@ -139,6 +139,7 @@ public class loginActivity extends AppCompatActivity
                         catch(JSONException e)
                         {
                             e.printStackTrace();
+                            swalDialog.hide();
                             Log.e("loginUser (CATCH): ", e.toString());
                         }
                     }
@@ -149,6 +150,7 @@ public class loginActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError volleyError)
                     {
                         // Showing error message if something goes wrong.
+                        swalDialog.hide();
                         Log.e("Error Response:", volleyError.toString());
                     }
                 })
