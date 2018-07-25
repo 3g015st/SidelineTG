@@ -373,7 +373,7 @@ public class postTaskActivity extends AppCompatActivity
         }
         if(!validationUtil.isValidTaskDescription(etDescription))
         {
-            etDescription.setError("Description is less than 50 characters!");
+            etDescription.setError("Description is less than 40 characters!");
             ERROR_COUNT = true;
         }
         if(validationUtil.isEmpty(etTaskPayment))
@@ -405,6 +405,10 @@ public class postTaskActivity extends AppCompatActivity
     private void sendRequest()
     {
         Log.e("sendRequest: ", "START!");
+        Log.e("CITY: ", city);
+        Log.e("LAT: ", latitude);
+        Log.e("LONG: ", longitude);
+
         // Get route obj.
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
@@ -422,8 +426,19 @@ public class postTaskActivity extends AppCompatActivity
                     {
                         // Showing response message coming from server.
                         Log.e("RESPONSE: ", ServerResponse);
-                        swalDialog.hide();
-                        TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+
+                        if(ServerResponse.equals("SUCCESS"))
+                        {
+                            // Exit this activity then prompt success
+                            swalDialog.hide();
+                            TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                        }
+                        else
+                        {
+                            // Prompt error
+                            swalDialog.hide();
+                            TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                        }
                     }
                 },
                 new Response.ErrorListener()
@@ -443,12 +458,23 @@ public class postTaskActivity extends AppCompatActivity
                 // Creating Map String Params.
                 Map<String, String> Parameter = new HashMap<String, String>();
 
-                // Sending all fields to 'Parameter'.
+                // Convert to BASE64
                 String imageOneData = imageToString(bitmap_one);
                 String imageTwoData = imageToString(bitmap_two);
 
                 Parameter.put("image_one", imageOneData);
                 Parameter.put("image_two", imageTwoData);
+
+                Parameter.put("title", etTaskTitle.getText().toString());
+                Parameter.put("description", etDescription.getText().toString());
+                Parameter.put("date_time_end", etTaskDate.getText().toString());
+                Parameter.put("task_fee", etTaskPayment.getText().toString());
+                Parameter.put("task_giver_id", USER_ID);
+                Parameter.put("task_category_id", TASK_CATEGORY_ID);
+                Parameter.put("line_one", line_one);
+                Parameter.put("city", city);
+                Parameter.put("latitude", latitude);
+                Parameter.put("longitude", longitude);
 
                 return Parameter;
             }

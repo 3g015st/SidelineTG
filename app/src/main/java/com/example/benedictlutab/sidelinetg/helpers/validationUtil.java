@@ -83,7 +83,7 @@ public class validationUtil
     {
         String description = text.getText().toString();
 
-        if(description.length() < 50)
+        if(description.length() < 40)
         {
             return false;
         }

@@ -232,7 +232,10 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
                                 // Move camera to the found location
                                 moveCamera(new LatLng(latitude, longitude), DEFAULT_ZOOM);
-                                Log.e("ADDRESS:", line_one + city);
+                                Log.e("ADDRESS:", line_one);
+                                Log.e("CITY: ", city);
+                                Log.e("LAT: ", Double.toString(latitude));
+                                Log.e("LONG: ",  Double.toString(longitude));
                             }
                         }
                         else
@@ -346,7 +349,10 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
             // Move camera to the found location
             moveCamera(new LatLng(latitude, longitude), DEFAULT_ZOOM);
-            Log.e("ADDRESS:", line_one + city);
+            Log.e("ADDRESS:", line_one);
+            Log.e("CITY: ", city);
+            Log.e("LAT: ", Double.toString(latitude));
+            Log.e("LONG: ",  Double.toString(longitude));
         }
     }
 
@@ -357,8 +363,8 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
         Intent returnIntent = new Intent();
         returnIntent.putExtra("line_one",line_one);
         returnIntent.putExtra("city",city);
-        returnIntent.putExtra("latitude",latitude);
-        returnIntent.putExtra("longitude",longitude);
+        returnIntent.putExtra("latitude",Double.toString(latitude));
+        returnIntent.putExtra("longitude",Double.toString(longitude));
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }

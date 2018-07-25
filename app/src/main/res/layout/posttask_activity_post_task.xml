@@ -107,7 +107,7 @@
                     android:textColorHint="#bdbdbd"
                     app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                     app:counterEnabled="true"
-                    app:counterMaxLength="50"
+                    app:counterMaxLength="40"
                     app:counterOverflowTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter.Exceed"
                     app:counterTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter">
                     <EditText
@@ -121,7 +121,7 @@
                         android:textColor="#eeeeee"
                         android:textSize="15dp"
                         android:inputType="textMultiLine|textFilter"
-                        android:maxLength="80"
+                        android:maxLength="60"
                         android:lines="3"
                         android:maxLines="3"/>
                 </android.support.design.widget.TextInputLayout>
@@ -164,7 +164,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:backgroundTint="@color/colorAccent"
-                        android:hint="TASK DATE"
+                        android:hint="TASK DUE DATE"
                         android:textColor="#eeeeee"
                         android:textSize="15dp" />
                 </android.support.design.widget.TextInputLayout>
