@@ -16,6 +16,7 @@ public class apiRouteUtil
     public String URL_SIGNUP                = DOMAIN + "api/taskgiver/createUserAccount.php";
     public String URL_LOAD_TASK_CATEGORIES  = DOMAIN + "api/taskgiver/loadTaskCategories.php";
     public String URL_POST_TASK             = DOMAIN + "api/taskgiver/postTask.php";
+    public String URL_MY_TASKS              = DOMAIN + "api/taskgiver/myTasks.php";
 
     public String URL_LOGIN                 = DOMAIN + "api/common/login.php";
     public String URL_CHECK_CONNECTION      = DOMAIN + "api/common/checkConnection.php";

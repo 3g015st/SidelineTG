@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
+import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
 import com.example.benedictlutab.sidelinetg.modules.signup.accountKitActivity;
 import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
@@ -80,102 +81,117 @@ public class loginActivity extends AppCompatActivity
     public void loginUser()
     {
         Log.e("loginUser:", "START!");
-        // Get route obj.
-        apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
-        // Init loading dialog.
-        final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        swalDialog.setTitleText("");
-        swalDialog.setCancelable(false);
-
-        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOGIN,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String ServerResponse)
-                    {
-                        swalDialog.hide();
-                        // Showing response message coming from server.
-                        Log.e("RESPONSE: ", ServerResponse);
-
-                        // Fetch JSON Response
-                        try
-                        {
-                            JSONArray jsonArray = new JSONArray(ServerResponse);
-
-                            for(int x = 0; x < jsonArray.length(); x++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(x);
-                                message               = jsonObject.getString("message");
-                                response_code         = jsonObject.getString("response_code");
-
-                                Log.e("Fetch jsonArray:", message + response_code);
-                            }
-
-                            if(message.equals("Invalid email or password") && response_code.equals("ERROR"))
-                            {
-                                TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-                            }
-                            else if(message.equals("Account does not exists.") && response_code.equals("ERROR"))
-                            {
-                                TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-                            }
-                            else if(response_code.equals("SUCCESS"))
-                            {
-                                sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("USER_ID", message);
-                                editor.commit();
-
-                                // Go to homeActivity
-                                Intent intent = new Intent(loginActivity.this, homeActivity.class);
-                                finish();
-                                startActivity(intent);
-                                Log.e("loginUser:", "SUCCESS!" + message);
-                            }
-
-                        }
-                        catch(JSONException e)
-                        {
-                            e.printStackTrace();
-                            swalDialog.hide();
-                            Log.e("loginUser (CATCH): ", e.toString());
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError)
-                    {
-                        // Showing error message if something goes wrong.
-                        swalDialog.hide();
-                        Log.e("Error Response:", volleyError.toString());
-                    }
-                })
+        validationUtil validationUtil = new validationUtil();
+        if(validationUtil.isValidEmail(etEmail) && validationUtil.isEmpty(etPassword))
         {
-            @Override
-            protected Map<String, String> getParams()
+            etEmail.setError("Email address is invalid");
+            etPassword.setError("Password is required!");
+        }
+        else if(validationUtil.isEmpty(etEmail) || validationUtil.isEmpty(etPassword))
+        {
+            TastyToast.makeText(getApplicationContext(), "Both fields are required", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+        }
+        else
+        {
+            // Get route obj.
+            apiRouteUtil apiRouteUtil = new apiRouteUtil();
+
+            // Init loading dialog.
+            final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            swalDialog.setTitleText("");
+            swalDialog.setCancelable(false);
+
+            StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOGIN,
+                    new Response.Listener<String>()
+                    {
+                        @Override
+                        public void onResponse(String ServerResponse)
+                        {
+                            swalDialog.hide();
+                            // Showing response message coming from server.
+                            Log.e("RESPONSE: ", ServerResponse);
+
+                            // Fetch JSON Response
+                            try
+                            {
+                                JSONArray jsonArray = new JSONArray(ServerResponse);
+
+                                for(int x = 0; x < jsonArray.length(); x++)
+                                {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(x);
+                                    message               = jsonObject.getString("message");
+                                    response_code         = jsonObject.getString("response_code");
+
+                                    Log.e("Fetch jsonArray:", message + response_code);
+                                }
+
+                                if(message.equals("Invalid email or password") && response_code.equals("ERROR"))
+                                {
+                                    TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                                }
+                                else if(message.equals("Account does not exists.") && response_code.equals("ERROR"))
+                                {
+                                    TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                                }
+                                else if(response_code.equals("SUCCESS"))
+                                {
+                                    sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("USER_ID", message);
+                                    editor.commit();
+
+                                    // Go to homeActivity
+                                    Intent intent = new Intent(loginActivity.this, homeActivity.class);
+                                    finish();
+                                    startActivity(intent);
+                                    Log.e("loginUser:", "SUCCESS!" + message);
+                                }
+
+                            }
+                            catch(JSONException e)
+                            {
+                                e.printStackTrace();
+                                swalDialog.hide();
+                                Log.e("loginUser (CATCH): ", e.toString());
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError)
+                        {
+                            // Showing error message if something goes wrong.
+                            swalDialog.hide();
+                            Log.e("Error Response:", volleyError.toString());
+                        }
+                    })
             {
-                // Creating Map String Params.
-                Map<String, String> Parameter = new HashMap<String, String>();
+                @Override
+                protected Map<String, String> getParams()
+                {
+                    // Creating Map String Params.
+                    Map<String, String> Parameter = new HashMap<String, String>();
 
-                // Sending all registration fields to 'Parameter'.
-                Parameter.put("email", etEmail.getText().toString());
-                Parameter.put("password", etPassword.getText().toString());
-                Parameter.put("role", ROLE);
+                    // Sending all registration fields to 'Parameter'.
+                    Parameter.put("email", etEmail.getText().toString());
+                    Parameter.put("password", etPassword.getText().toString());
+                    Parameter.put("role", ROLE);
 
-                return Parameter;
-            }
-        };
-        // Initialize requestQueue.
-        RequestQueue requestQueue = Volley.newRequestQueue(loginActivity.this);
+                    return Parameter;
+                }
+            };
+            // Initialize requestQueue.
+            RequestQueue requestQueue = Volley.newRequestQueue(loginActivity.this);
 
-        // Send the StringRequest to the requestQueue.
-        requestQueue.add(StringRequest);
+            // Send the StringRequest to the requestQueue.
+            requestQueue.add(StringRequest);
 
-        // Display progress dialog.
-        swalDialog.show();
-    }
+            // Display progress dialog.
+            swalDialog.show();
+        }
+        }
+
 }

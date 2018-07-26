@@ -31,14 +31,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Additional libraries
-    // Butterknife
+    //Butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    // SWAL
+    //SWAL
     implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
-    // Volley HTTP
+    //Volley HTTP
     implementation 'com.android.volley:volley:1.1.0'
-    // TastyToast
+    //TastyToast
     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     //FB Account Kit
     implementation 'com.facebook.android:account-kit-sdk:4.+'
@@ -52,4 +52,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:11.8.0'
     //Google Play Services - PLACES
     implementation 'com.google.android.gms:play-services-places:11.8.0'
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

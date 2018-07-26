@@ -118,7 +118,7 @@ public class postTaskActivity extends AppCompatActivity
 
         // Set minimum payment editText hint
         etTaskPayment.setHintTextColor(getResources().getColor(R.color.colorAccent));
-        etTaskPayment.setHint(Float.toString(MINIMUM_PAYMENT));
+        etTaskPayment.setHint("PHP " + Float.toString(MINIMUM_PAYMENT));
 
         // Set task date listener.
         DateSetListener = new DatePickerDialog.OnDateSetListener()
@@ -425,19 +425,21 @@ public class postTaskActivity extends AppCompatActivity
                     public void onResponse(String ServerResponse)
                     {
                         // Showing response message coming from server.
-                        Log.e("RESPONSE: ", ServerResponse);
+                        String SERVER_RESPONSE = ServerResponse.replaceAll("\\s+","");
+                        Log.e("RESPONSE: ", SERVER_RESPONSE);
 
-                        if(ServerResponse.equals("SUCCESS"))
+                        if(SERVER_RESPONSE.equals("SUCCESS"))
                         {
                             // Exit this activity then prompt success
                             swalDialog.hide();
-                            TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                            TastyToast.makeText(getApplicationContext(), "Your task has been successfully posted!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                            finish();
                         }
                         else
                         {
                             // Prompt error
                             swalDialog.hide();
-                            TastyToast.makeText(getApplicationContext(), ServerResponse, TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                            TastyToast.makeText(getApplicationContext(), "There has been an error posting your task!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
                         }
                     }
                 },

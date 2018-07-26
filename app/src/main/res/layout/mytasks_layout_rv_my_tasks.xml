@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:id="@+id/llMyTask"
+    android:layout_width="360dp"
+    android:layout_height="570sp"
+    android:padding="8sp">
+
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="340dp"
+        android:layout_height="550dp"
+        android:layout_margin="35dp"
+        app:cardBackgroundColor="@color/colorBGPrimary"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--TASK IMAGE-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/civTaskPhoto"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:src="@drawable/main_img_photo" />
+            <!--TITLE-->
+            <TextView
+                android:id="@+id/tvTaskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/civTaskPhoto"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Task Title"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+            <View
+                android:layout_below="@id/tvTaskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorBGSecondary"/>
+            <!--ADDRESS-->
+            <TextView
+                android:id="@+id/tvTaskAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTaskTitle"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="10dp"
+                android:text="Task Address"
+                android:textSize="14dp"
+                android:textColor="#eeeeee"/>
+            <!--TASK DATE-->
+            <TextView
+                android:id="@+id/tvTaskDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTaskAddress"
+                android:layout_marginLeft="10dp"
+                android:text="Task Date"
+                android:textSize="14dp"
+                android:textColor="#eeeeee"/>
+            <TextView
+                android:id="@+id/tvTaskStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTaskDate"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="Task Status"
+                android:textSize="14dp"
+                android:textColor="#eeeeee"/>
+            <!--PAYMENT-->
+            <RelativeLayout
+                android:layout_below="@id/tvTaskStatus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:background="@color/colorPrimaryLight">
+                <TextView
+                    android:id="@+id/tvTaskPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Task Payment"
+                    android:textSize="17dp"
+                    android:layout_margin="9dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorFontPrimary"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

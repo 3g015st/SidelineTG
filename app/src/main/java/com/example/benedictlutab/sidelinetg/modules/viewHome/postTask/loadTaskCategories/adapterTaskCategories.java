@@ -54,7 +54,7 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position)
     {
-        Log.e("adapterTskCatego:", "STARTED!");
+        Log.e("onBindViewHolder:", "STARTED!");
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
         taskCategory taskCategory = taskCategoryList.get(position);

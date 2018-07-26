@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.viewHome.myTasks.myTasksFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:id="@+id/rv_mytasks"
+        android:layout_gravity="center|top"
+        android:overScrollMode="never"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="745dp"
+        tools:layout_editor_absoluteY="-51dp">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Items"
+        android:textSize="18dp"
+        android:textColor="@color/colorFontPrimary"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="45dp" />
+
+</FrameLayout>
