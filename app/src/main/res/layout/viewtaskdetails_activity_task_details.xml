@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGSecondary"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails.taskDetailsActivity">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeRefLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--App Bar/Title Bar-->
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimaryLight"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnBack"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/main_img_back" />
+
+                    <TextView
+                        android:id="@+id/tvTaskTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:text="Task Title"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="19sp" />
+                </LinearLayout>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Submitted By:"
+                        android:textAllCaps="true"
+                        android:textColor="#90a4ae" />
+                    <TextView
+                        android:id="@+id/tvTaskPostedDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="xx Hours/Mins Ago..."
+                        android:textAllCaps="true"
+                        android:textColor="#90a4ae"
+                        android:textSize="11sp" />
+                    <!--TG NAME AND PROFILE PIC-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/civTaskGiverPhoto"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/main_img_person"
+                            app:civ_border_color="#616161"
+                            app:civ_border_width="1dp" />
+
+                        <TextView
+                            android:id="@+id/tvTaskGiver"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="14dp"
+                            android:text="Task Giver Name"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/colorBGPrimary" />
+                    <!--TASK IMAGES-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Images:"
+                        android:textAllCaps="true"
+                        android:textColor="#90a4ae" />
+
+                    <ViewFlipper
+                        android:id="@+id/vfTaskImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"></ViewFlipper>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorBGPrimary" />
+                    <!--DETAILS HEADER-->
+                    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="15dp"
+                        app:cardBackgroundColor="@color/colorBGPrimary"
+                        app:cardElevation="2dp"
+                        app:cardUseCompatPadding="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Details"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="17sp" />
+                    </android.support.v7.widget.CardView>
+                    <!--TASK DESCR-->
+                    <TextView
+                        android:id="@+id/tvTaskDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:maxWidth="50dp"
+                        android:layout_margin="15dp"
+                        android:maxEms="5"
+                        android:singleLine="false"
+                        android:text="Lorem ipsum dolor. Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor."
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorBGPrimary" />
+
+                    <TextView
+                        android:id="@+id/tvTaskAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Task Address"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvTaskDueDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Task Date End"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvTaskCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Task Category"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvTaskStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="25dp"
+                        android:text="Task Status"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <!--ASSIGNEE HEADER-->
+                    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="25dp"
+                        app:cardBackgroundColor="@color/colorBGPrimary"
+                        app:cardElevation="2dp"
+                        app:cardUseCompatPadding="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Assignee"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="17sp" />
+                    </android.support.v7.widget.CardView>
+
+                    <!--TSKR PIC AND NAME-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/civTaskerPhoto"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/main_img_person"
+                            app:civ_border_color="#616161"
+                            app:civ_border_width="1dp" />
+
+                        <TextView
+                            android:id="@+id/tvTasker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="13dp"
+                            android:layout_toEndOf="@+id/civTaskerPhoto"
+                            android:text="None"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <!--PLACE AN OFFER-->
+                    <Button
+                        android:id="@+id/btnViewOffers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="50dp"
+                        android:text="View Offers"
+                        android:textColor="#eeeeee"
+                        android:textSize="18sp"
+                        android:background="@drawable/main_btn_bg"/>
+                    <!--CANCEL-->
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="60dp"
+                        android:text="Cancel Task"
+                        android:textColor="#d32f2f"
+                        android:textSize="18sp"
+                        android:background="@drawable/main_btn_bg_cancel"/>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+            <!--TASK FEE-->
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#26a69a">
+
+                <TextView
+                    android:id="@+id/tvTaskFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1.0"
+                    android:text="Task Fee"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorFontPrimary"
+                    android:textSize="19sp" />
+            </android.support.design.widget.AppBarLayout>
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

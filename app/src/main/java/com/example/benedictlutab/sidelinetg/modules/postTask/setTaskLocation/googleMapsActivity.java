@@ -1,10 +1,9 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.setTaskLocation;
+package com.example.benedictlutab.sidelinetg.modules.postTask.setTaskLocation;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,7 +21,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +42,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -388,7 +385,7 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
     private void changeFontFamily()
     {
         // Change Font Style.
-        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/ralewayRegular.ttf");
+        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/avenir.otf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
     }
 

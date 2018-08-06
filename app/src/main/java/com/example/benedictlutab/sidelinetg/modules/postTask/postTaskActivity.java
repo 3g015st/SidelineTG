@@ -1,4 +1,4 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask;
+package com.example.benedictlutab.sidelinetg.modules.postTask;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -38,7 +38,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
-import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.setTaskLocation.googleMapsActivity;
+import com.example.benedictlutab.sidelinetg.modules.postTask.setTaskLocation.googleMapsActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -322,15 +322,15 @@ public class postTaskActivity extends AppCompatActivity
     private void changeFontFamily()
     {
         // Change Font Style.
-        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/ralewayRegular.ttf");
+        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/avenir.otf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
 
         // Change Hint Font Style.
-        tilTaskTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-        tilDescription.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-        tilTaskDate.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-        tilTaskAddress.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-        tilTaskPayment.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
+        tilTaskTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
+        tilDescription.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
+        tilTaskDate.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
+        tilTaskAddress.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
+        tilTaskPayment.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
     }
 
     private void displayDatePicker()

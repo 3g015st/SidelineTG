@@ -38,6 +38,13 @@
 
     <!--Bottom Nav Style-->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/ralewayregular</item>
+        <item name="fontFamily">@font/avenir</item>
     </style>
+
+    <!--Rating Bar Style-->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorBGSecondary</item>
+        <item name="colorControlActivated">#ffeb3b</item>
+    </style>
+
 </resources>

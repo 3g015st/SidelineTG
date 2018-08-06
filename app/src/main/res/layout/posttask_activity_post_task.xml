@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBGSecondary"
     android:orientation="vertical"
-    tools:context="com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.postTaskActivity">
+    tools:context=".modules.postTask.postTaskActivity">
 
     <!--App Bar/Title Bar-->
     <android.support.design.widget.AppBarLayout

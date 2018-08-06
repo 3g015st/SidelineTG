@@ -54,4 +54,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:11.8.0'
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //PrettyTime
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 }

@@ -1,4 +1,4 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.loadTaskCategories;
+package com.example.benedictlutab.sidelinetg.modules.postTask.loadTaskCategories;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.models.taskCategory;
-import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.postTaskActivity;
+import com.example.benedictlutab.sidelinetg.modules.postTask.postTaskActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
         View view = inflater.inflate(R.layout.posttask_layout_rv_task_category, null);
         if(view != null)
         {
-            fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(view.getContext().getAssets(), "fonts/ralewayRegular.ttf");
+            fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(view.getContext().getAssets(), "fonts/avenir.otf");
             fontStyleCrawler.replaceFonts((ViewGroup)view);
         }
         return new ViewHolder(view);
@@ -67,7 +67,7 @@ public class adapterTaskCategories extends RecyclerView.Adapter<adapterTaskCateg
 
         holder.MINIMUM_PAYMENT = taskCategory.getMinimum_payment();
 
-        holder.IMAGE_URL = apiRouteUtil.DOMAIN + "api" + taskCategory.getTask_category_img();
+        holder.IMAGE_URL = apiRouteUtil.DOMAIN + taskCategory.getTask_category_img();
         Log.e("IMAGE URL: ", holder.IMAGE_URL);
 
         //Bind fetched image url from server

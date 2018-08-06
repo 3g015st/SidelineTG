@@ -1,4 +1,4 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.loadTaskCategories;
+package com.example.benedictlutab.sidelinetg.modules.postTask.loadTaskCategories;
 
 
 import android.graphics.Typeface;
@@ -67,7 +67,7 @@ public class taskCategoryFragment extends Fragment
         fetchTaskCategories();
 
         // Change Font Style.
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ralewayRegular.ttf");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/avenir.otf");
         tvTitle.setTypeface(font);
 
         return rootView;

@@ -34,15 +34,15 @@
             tools:replace="android:theme" />
         <!-- FB Account Kit (END) -->
 
-        <!--Google Maps (START)-->
+
+        <!-- Google Maps (START) -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAdOtuVu6-IUSVygGQQtYoCfe49zrunfuM" />
-        <!--Google Maps (END)-->
+        <!-- Google Maps (END) -->
 
         <activity
             android:name=".modules.welcomeUser.entranceActivity"
@@ -58,8 +58,10 @@
         <activity android:name=".modules.signup.signupActivity" />
         <activity android:name=".modules.signup.accountKitActivity" />
         <activity android:name=".modules.viewHome.homeActivity" />
-        <activity android:name=".modules.viewHome.postTask.postTaskActivity" />
-        <activity android:name=".modules.viewHome.postTask.setTaskLocation.googleMapsActivity"></activity>
+        <activity android:name=".modules.postTask.postTaskActivity" />
+        <activity android:name=".modules.myTasks.viewTaskDetails.taskDetailsActivity" />
+        <activity android:name=".modules.postTask.setTaskLocation.googleMapsActivity" />
+        <activity android:name=".modules.myTasks.viewTaskOffers.taskOffersActivity"></activity>
     </application>
 
 </manifest>

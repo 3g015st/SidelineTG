@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.setTaskLocation.googleMapsActivity">
+    tools:context=".modules.postTask.setTaskLocation.googleMapsActivity">
 
     <!--App Bar/Title Bar-->
     <android.support.design.widget.AppBarLayout

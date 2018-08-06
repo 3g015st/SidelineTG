@@ -1,12 +1,12 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.myTasks;
+package com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +14,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.models.Task;
+import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails.taskDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
         View view = inflater.inflate(R.layout.mytasks_layout_rv_my_tasks, null);
         if(view != null)
         {
-            fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(view.getContext().getAssets(), "fonts/ralewayRegular.ttf");
+            fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(view.getContext().getAssets(), "fonts/avenir.otf");
             fontStyleCrawler.replaceFonts((ViewGroup)view);
         }
         return new ViewHolder(view);
@@ -67,7 +68,7 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
         holder.tvTaskStatus.setText(task.getStatus());
         holder.tvTaskPayment.setText("PHP " + task.getTask_fee());
 
-        holder.IMAGE_URL = apiRouteUtil.DOMAIN + "api" + task.getImage_one();
+        holder.IMAGE_URL = apiRouteUtil.DOMAIN + task.getImage_one();
         Log.e("IMAGE URL: ", holder.IMAGE_URL);
 
         //Bind fetched image url from server
@@ -80,6 +81,9 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
             {
                 // Go to Task Details.
                 Log.e("TASK ID: ", holder.TASK_ID);
+                Intent intent = new Intent(context, taskDetailsActivity.class);
+                intent.putExtra("TASK_ID", holder.TASK_ID);
+                context.startActivity(intent);
             }
         });
     }

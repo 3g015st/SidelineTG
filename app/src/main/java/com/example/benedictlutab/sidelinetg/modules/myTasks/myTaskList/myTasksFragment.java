@@ -1,4 +1,4 @@
-package com.example.benedictlutab.sidelinetg.modules.viewHome.myTasks;
+package com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -79,7 +79,7 @@ public class myTasksFragment extends Fragment
         }
 
         // Change Font Style.
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ralewayRegular.ttf");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/avenir.otf");
         tvItems.setTypeface(font);
 
         // Behave like ViewPager

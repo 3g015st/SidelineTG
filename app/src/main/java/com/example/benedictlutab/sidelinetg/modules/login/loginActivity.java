@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,10 +22,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
-import com.example.benedictlutab.sidelinetg.modules.signup.accountKitActivity;
-import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
-import com.example.benedictlutab.sidelinetg.modules.welcomeUser.entranceActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -69,12 +65,12 @@ public class loginActivity extends AppCompatActivity
     private void changeFontFamily()
     {
         // Change Font Style.
-        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/ralewayRegular.ttf");
+        fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/avenir.otf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
 
         // Change Hint Font Style.
-        tilEmail.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
-        tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ralewayRegular.ttf"));
+        tilEmail.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
+        tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
     }
 
     @OnClick(R.id.btnLogin)

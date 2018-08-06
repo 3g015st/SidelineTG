@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.benedictlutab.sidelinetg.R;
-import com.example.benedictlutab.sidelinetg.modules.viewHome.myTasks.myTasksFragment;
-import com.example.benedictlutab.sidelinetg.modules.viewHome.postTask.loadTaskCategories.taskCategoryFragment;
+import com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList.myTasksFragment;
+import com.example.benedictlutab.sidelinetg.modules.postTask.loadTaskCategories.taskCategoryFragment;
 
 public class homeActivity extends AppCompatActivity
 {
