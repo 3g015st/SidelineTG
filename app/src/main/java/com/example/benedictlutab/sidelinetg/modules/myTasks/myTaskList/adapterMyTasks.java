@@ -1,5 +1,6 @@
 package com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -29,10 +30,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHolder>
 {
-    public Context context;
+    public Activity context;
     public List<Task> taskList;
 
-    public adapterMyTasks(Context context, List<Task> taskList)
+    public adapterMyTasks(Activity context, List<Task> taskList)
     {
         this.context = context;
         this.taskList = taskList;
@@ -83,7 +84,7 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
                 Log.e("TASK ID: ", holder.TASK_ID);
                 Intent intent = new Intent(context, taskDetailsActivity.class);
                 intent.putExtra("TASK_ID", holder.TASK_ID);
-                context.startActivity(intent);
+                context.startActivityForResult(intent, 69);
             }
         });
     }
@@ -110,6 +111,17 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
         {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public static void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        Log.e("onActivityResult", "START!");
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode == 69)
+        {
+            // Refresh activity.
+
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -24,7 +27,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
+import com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList.myTasksFragment;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskOffers.taskOffersActivity;
+import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -70,9 +77,11 @@ public class taskDetailsActivity extends AppCompatActivity
     private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
     private Date postedDate = new Date();
 
-    private String TASK_ID, USER_ID, TASK_STATUS;
+    private String TASK_ID, USER_ID, TASK_STATUS, message;
     private SharedPreferences sharedPreferences;
     private String[] taskImages = new String[2];
+
+    final apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -116,6 +125,132 @@ public class taskDetailsActivity extends AppCompatActivity
         startActivityForResult(intent, 420);
     }
 
+    @OnClick(R.id.btnCancel)
+    public void showCancelTaskPrompt()
+    {
+        Log.e("showCancelTaskPrompt: ", "STARTED!");
+
+        // Show alert dialog (ACCEPT OR NOT)
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("ARE YOU SURE?")
+                .setContentText(" Do you want to cancel this task? ")
+                .setCancelText(" CANCEL ")
+                .setConfirmText(" CONFIRM ")
+                .showCancelButton(true)
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener()
+                {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog)
+                    {
+                        Log.e("showCancelTaskPrompt: ", "CANCEL!");
+                        sDialog.hide();
+                    }
+                })
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+                {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog)
+                    {
+                        // Send POST Request to Cancel this task.
+                        Log.e("showCancelTaskPrompt: ", "CONFIRMED!");
+                        Log.e("showCancelTaskPrompt: ", "TASK STATUS - " + TASK_STATUS);
+
+                        cancelTask(TASK_STATUS);
+                    }
+                })
+                .show();
+    }
+
+    public void cancelTask(final String TASK_STATUS)
+    {
+        final String updateTaskStatus;
+
+        Log.e("cancelTask: ", "STARTED!");
+        if(TASK_STATUS.equals("ASSIGNED"))
+        {
+            updateTaskStatus = "CANCELLED (ASSIGNED)";
+            Log.e("cancelTask: ", updateTaskStatus);
+        }
+        else
+        {
+            updateTaskStatus = "CANCELLED";
+            Log.e("cancelTask: ", updateTaskStatus);
+        }
+
+        // Send POST Request.
+
+        // Init loading dialog.
+        final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        swalDialog.setTitleText("");
+        swalDialog.setCancelable(false);
+
+        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_CANCEL_TASK,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String ServerResponse)
+                    {
+                        swalDialog.hide();
+                        // Showing response message coming from server.
+                        String SERVER_RESPONSE = ServerResponse.replaceAll("\\s+","");
+                        Log.e("RESPONSE: ", SERVER_RESPONSE);
+
+                        try
+                        {
+                            if(SERVER_RESPONSE.equals("SUCCESS"))
+                            {
+                                TastyToast.makeText(getApplicationContext(), "Task successfully cancelled!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+
+                                Intent intent = new Intent();
+                                setResult(69, intent);
+                                finish();
+                            }
+                            else
+                            {
+                                TastyToast.makeText(getApplicationContext(), "There has been an error in cancelling your task.", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                            swalDialog.hide();
+                            Log.e("cancelTask (CATCH): ", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        // Showing error message if something goes wrong.
+                        swalDialog.hide();
+                        Log.e("Error Response:", volleyError.toString());
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+
+                Parameter.put("status", updateTaskStatus);
+                Parameter.put("task_id", TASK_ID);
+
+                return Parameter;
+            }
+        };
+        // Initialize requestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(taskDetailsActivity.this);
+
+        // Send the StringRequest to the requestQueue.
+        requestQueue.add(StringRequest);
+
+        // Display progress dialog.
+        swalDialog.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -123,6 +258,7 @@ public class taskDetailsActivity extends AppCompatActivity
         // check if the request code is same as what is passed  here it is 2
         if(requestCode == 420)
         {
+            // Refresh activity.
             initSwipeRefLayout();
         }
     }
@@ -161,8 +297,6 @@ public class taskDetailsActivity extends AppCompatActivity
     private void fetchTaskDetails()
     {
         Log.e("fetchTaskDetails: ", "STARTED !");
-
-        final apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_TASK_DETAILS, new Response.Listener<String>()
         {

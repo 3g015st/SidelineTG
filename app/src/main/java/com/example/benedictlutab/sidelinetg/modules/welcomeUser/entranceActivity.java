@@ -55,6 +55,8 @@ public class entranceActivity extends AppCompatActivity
 
     private String REQUEST = "CHECK_CONN";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -134,6 +136,11 @@ public class entranceActivity extends AppCompatActivity
         // Get route obj.
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
+        final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        swalDialog.setTitleText("");
+        swalDialog.setCancelable(false);
+
         StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_CHECK_CONNECTION,
                 new Response.Listener<String>()
                 {
@@ -146,11 +153,13 @@ public class entranceActivity extends AppCompatActivity
                         // If there is no connection to server,
                         if(ServerResponse.equals("ERROR"))
                         {
+                            swalDialog.hide();
                            showNetworkError();
                         }
                         else
                         {
                             // Enable buttons
+                            swalDialog.hide();
                             btnLogin.setEnabled(true);
                             btnSignup.setEnabled(true);
                         }
@@ -163,6 +172,7 @@ public class entranceActivity extends AppCompatActivity
                     {
                         // Showing error message if something goes wrong.
                         Log.e("Error Response:", volleyError.toString());
+                        swalDialog.hide();
                         showNetworkError();
                     }
                 })
@@ -181,6 +191,8 @@ public class entranceActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(entranceActivity.this);
         // Send the StringRequest to the requestQueue.
         requestQueue.add(StringRequest);
+
+        swalDialog.show();
     }
 
     private void showNetworkError()

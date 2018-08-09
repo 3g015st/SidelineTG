@@ -1,6 +1,7 @@
 package com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,7 +98,7 @@ public class myTasksFragment extends Fragment
     {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapterMyTasks adapterMyTasks = new adapterMyTasks(getActivity().getApplicationContext(), taskList);
+        adapterMyTasks adapterMyTasks = new adapterMyTasks(getActivity(), taskList);
         recyclerView.setAdapter(adapterMyTasks);
         if (listSize == 0)
         {
