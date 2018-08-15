@@ -1,5 +1,7 @@
 package com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskOffers;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,11 +44,13 @@ public class taskOffersActivity extends AppCompatActivity
     @BindView(R.id.tvOffers) TextView tvOffers;
     @BindView(R.id.swipeRefLayout_id) SwipeRefreshLayout swipeRefLayout;
 
-    private String TASK_ID;
+    private String TASK_ID, USER_ID;
     private adapterDisplayOffers adapterDisplayOffers;
 
     private int listSize;
     private List<Offer> offerList = new ArrayList<>();
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +65,14 @@ public class taskOffersActivity extends AppCompatActivity
         {
             TASK_ID = Extras.getString("TASK_ID");
             Log.e("TASK_ID: ", TASK_ID);
+        }
+
+        // Get USER_ID
+        sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+        if (sharedPreferences.contains("USER_ID"))
+        {
+            USER_ID = sharedPreferences.getString("USER_ID", "");
+            Log.e("USER_ID:", USER_ID);
         }
 
         initSwipeRefLayout();
@@ -86,7 +98,7 @@ public class taskOffersActivity extends AppCompatActivity
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapterDisplayOffers = new adapterDisplayOffers(this.getWindow().getContext(), offerList);
+        adapterDisplayOffers = new adapterDisplayOffers(this.getWindow().getContext(), offerList, USER_ID);
         recyclerView.setAdapter(adapterDisplayOffers);
 
         if (listSize == 0)

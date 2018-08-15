@@ -231,14 +231,17 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="85dp">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/civTaskerPhoto"
                             android:layout_width="55dp"
                             android:layout_height="55dp"
                             android:src="@drawable/main_img_person"
-                            app:civ_border_color="#616161"
+                            app:civ_border_color="#ef5350"
                             app:civ_border_width="1dp" />
 
                         <TextView
@@ -249,8 +252,9 @@
                             android:layout_marginStart="13dp"
                             android:layout_toEndOf="@+id/civTaskerPhoto"
                             android:text="None"
-                            android:textColor="@color/colorFontPrimary"
-                            android:textSize="15sp" />
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="18sp" />
                     </RelativeLayout>
 
                     <!--PLACE AN OFFER-->

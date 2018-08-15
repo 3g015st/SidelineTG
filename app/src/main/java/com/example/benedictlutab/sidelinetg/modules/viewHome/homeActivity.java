@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.benedictlutab.sidelinetg.R;
+import com.example.benedictlutab.sidelinetg.modules.messages.loadChatRooms.chatRoomsFragment;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList.myTasksFragment;
 import com.example.benedictlutab.sidelinetg.modules.postTask.loadTaskCategories.taskCategoryFragment;
 
@@ -35,6 +36,9 @@ public class homeActivity extends AppCompatActivity
                 {
                     case R.id.action_post_task:
                         fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, taskCategoryFragment.newInstance()).commit();
+                        break;
+                    case R.id.action_messages:
+                        fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, chatRoomsFragment.newInstance()).commit();
                         break;
                     case R.id.action_tasks:
                         fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, myTasksFragment.newInstance()).commit();

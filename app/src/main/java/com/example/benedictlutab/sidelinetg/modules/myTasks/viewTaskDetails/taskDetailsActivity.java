@@ -1,6 +1,5 @@
 package com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,9 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
-import com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList.myTasksFragment;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskOffers.taskOffersActivity;
-import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
@@ -73,6 +70,9 @@ public class taskDetailsActivity extends AppCompatActivity
     @BindView(R.id.civTaskGiverPhoto) CircleImageView civTaskGiverPhoto;
 
     @BindView(R.id.vfTaskImages) ViewFlipper vfTaskImages;
+
+    @BindView(R.id.civTaskerPhoto) CircleImageView civTaskerPhoto;
+    @BindView(R.id.tvTasker) TextView tvTasker;
 
     private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
     private Date postedDate = new Date();
@@ -278,6 +278,7 @@ public class taskDetailsActivity extends AppCompatActivity
             {
                 // Fetching data from server
                 fetchTaskDetails();
+                fetchAssignedTasker();
             }
         });
         swipeRefLayout.setColorSchemeResources(R.color.colorPrimaryDark, android.R.color.holo_green_dark, android.R.color.holo_orange_dark, android.R.color.holo_blue_dark);
@@ -287,8 +288,11 @@ public class taskDetailsActivity extends AppCompatActivity
             public void run()
             {
                 swipeRefLayout.setRefreshing(true);
+
                 // Fetching data from server
                 fetchTaskDetails();
+                fetchAssignedTasker();
+
                 swipeRefLayout.setRefreshing(false);
             }
         });
@@ -352,6 +356,64 @@ public class taskDetailsActivity extends AppCompatActivity
                             setImageInViewFlipper(apiRouteUtil.DOMAIN + taskImages[i]);
                             Log.e("TASKIMGS: ", apiRouteUtil.DOMAIN + taskImages[i]);
                         }
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("Catch Response: ", e.toString());
+
+                }
+                swipeRefLayout.setRefreshing(false);
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        Log.d("Error Response: ", volleyError.toString());
+                        swipeRefLayout.setRefreshing(false);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+
+                Parameter.put("TASK_ID", TASK_ID);
+
+                return Parameter;
+            }
+        };
+        // Add the StringRequest to Queue.
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void fetchAssignedTasker()
+    {
+        Log.e("fetchAssignedTasker: ", "STARTED !");
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_ASSIGNED_TASKER, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String ServerResponse)
+            {
+                try
+                {
+                    Log.e("SERVER RESPONSE: ", ServerResponse);
+                    JSONArray jsonArray = new JSONArray(ServerResponse);
+                    for(int x = 0; x < jsonArray.length(); x++)
+                    {
+                        JSONObject jsonObject = jsonArray.getJSONObject(x);
+
+                        // Load assigned tasker prof pic.
+                        Picasso.with(taskDetailsActivity.this).load(apiRouteUtil.DOMAIN + jsonObject.getString("profile_picture")).
+                                fit().centerInside().into(civTaskerPhoto);
+
+                        tvTasker.setText(jsonObject.getString("first_name") +" "+ jsonObject.getString("last_name").substring(0, 1));
                     }
                 }
                 catch (JSONException e)

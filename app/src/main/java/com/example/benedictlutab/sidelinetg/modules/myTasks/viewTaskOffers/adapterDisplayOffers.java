@@ -43,11 +43,13 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
 {
     private Context context;
     private List<Offer> offerList;
+    private String USER_ID;
 
-    public adapterDisplayOffers(Context context, List<Offer> offerList)
+    public adapterDisplayOffers(Context context, List<Offer> offerList, String USER_ID)
     {
         this.context = context;
         this.offerList = offerList;
+        this.USER_ID = USER_ID;
     }
 
     @Override
@@ -74,6 +76,7 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         // Bind data.
         holder.TASKER_ID = offer.getTasker_id();
         holder.TASK_ID   = offer.getTask_id();
+        holder.amount    = offer.getAmount();
 
         holder.tvTaskerName.setText(offer.getFirst_name() +" "+ offer.getLast_name().substring(0, 1));
         holder.tvNumReviews.setText(offer.getReviews() + " Reviews");
@@ -97,7 +100,7 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
 
                 // Show alert dialog (ACCEPT OR NOT)
                 new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("ARE YOU SURE?")
-                        .setContentText(" Do you want to assign " + holder.tvTaskerName.getText().toString() +" for this task? ")
+                        .setContentText(" Do you want to accept the offer and assign " + holder.tvTaskerName.getText().toString() +" for this task? ")
                         .setCancelText(" CANCEL ")
                         .setConfirmText(" ASSIGN ")
                         .showCancelButton(true)
@@ -117,7 +120,8 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
                                // Send POST Request to Accept Tasker
                                 Log.e("ACCEPT-TASKER ID: ", holder.TASKER_ID);
                                 Log.e("ACCEPT-TASK ID: ", holder.TASK_ID);
-                                assignTasker(holder.TASKER_ID, holder.TASK_ID);
+                                Log.e("ACCEPT-AMOUNT: ", holder.tvAmount.getText().toString());
+                                assignTasker(holder.TASKER_ID, holder.TASK_ID, holder.amount);
                             }
                         })
                         .show();
@@ -141,7 +145,7 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         @BindView(R.id.ratingBar) RatingBar ratingBar;
         @BindView(R.id.llAccept) LinearLayout llAccept;
 
-        private String TASK_ID, TASKER_ID, IMAGE_URL;
+        private String TASK_ID, TASKER_ID, IMAGE_URL, amount;
 
         public ViewHolder(final View itemView)
         {
@@ -150,7 +154,7 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         }
     }
 
-    public void assignTasker(final String TASKER_ID, final String TASK_ID)
+    public void assignTasker(final String TASKER_ID, final String TASK_ID, final String amount)
     {
         Log.e("sendOffer:", "START!");
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
@@ -207,6 +211,8 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
 
                 Parameter.put("tasker_id", TASKER_ID);
                 Parameter.put("task_id", TASK_ID);
+                Parameter.put("task_fee", amount);
+                Parameter.put("task_giver_id", USER_ID);
 
                 return Parameter;
             }

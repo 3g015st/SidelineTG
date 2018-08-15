@@ -55,8 +55,6 @@ public class entranceActivity extends AppCompatActivity
 
     private String REQUEST = "CHECK_CONN";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
