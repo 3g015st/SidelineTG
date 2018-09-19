@@ -1,18 +1,54 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBGSecondary"
     tools:context="com.example.benedictlutab.sidelinetg.modules.messages.loadChatRooms.chatRoomsFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
+        android:id="@+id/llShow"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:id="@+id/rv_chatroom"
-        android:layout_gravity="center|top"
-        android:overScrollMode="never"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="745dp"
-        tools:layout_editor_absoluteY="-51dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:id="@+id/rv_chatroom"
+            android:layout_gravity="center|top"
+            android:overScrollMode="never"
+            android:layout_marginTop="20dp"
+            tools:layout_editor_absoluteX="745dp"
+            tools:layout_editor_absoluteY="-51dp">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <!--IF EMPTY!-->
+    <LinearLayout
+        android:id="@+id/llEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="25dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:background="@drawable/main_img_empty_msg"/>
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="You don't have any messages yet!, Be assigned to a task first :)"
+            android:textSize="16sp"
+            android:textColor="@color/colorFontPrimary"
+            android:layout_gravity="top"
+            android:layout_marginTop="15dp"
+            android:layout_margin="35dp"/>
+    </LinearLayout>
+
 
 </FrameLayout>

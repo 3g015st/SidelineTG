@@ -8,11 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/img_logo_app"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/img_logo_app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -61,7 +64,10 @@
         <activity android:name=".modules.postTask.postTaskActivity" />
         <activity android:name=".modules.myTasks.viewTaskDetails.taskDetailsActivity" />
         <activity android:name=".modules.postTask.setTaskLocation.googleMapsActivity" />
-        <activity android:name=".modules.myTasks.viewTaskOffers.taskOffersActivity"></activity>
+        <activity android:name=".modules.myTasks.viewTaskOffers.taskOffersActivity" />
+        <activity android:name=".modules.viewTaskerProfile.taskerProfileActivity" />
+        <activity android:name=".modules.changePassword.changePasswordActivity" />
+        <activity android:name=".modules.recoverAccount.searchEmailActivity"></activity>
     </application>
 
 </manifest>

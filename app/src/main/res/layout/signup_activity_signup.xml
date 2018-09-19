@@ -11,7 +11,6 @@
 
     <!--App Bar/Title Bar-->
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/ablEvaluation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="top"
@@ -43,7 +42,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <!--Logo-->
-
     <ImageView
         android:layout_width="250dp"
         android:layout_height="80dp"
@@ -51,231 +49,270 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/img_logo_text" />
 
-    <!--Email and Password-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorBGPrimary"
-        android:orientation="vertical">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
 
-        <!--Email Address-->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColorHint="#bdbdbd"
-            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/colorAccent"
-                android:hint="Email Address"
-                android:inputType="textEmailAddress"
-                android:textColor="#eeeeee"
-                android:singleLine="true"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <!--Password-->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="#bdbdbd"
-            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-            app:passwordToggleEnabled="true">
-
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/colorAccent"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textColor="#eeeeee"
-                android:singleLine="true"/>
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-
-    <!--FN, LN, Birthdate, Gender-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorBGPrimary"
-        android:orientation="vertical">
-
-        <!--FN and LN-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <!--FN-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="#bdbdbd"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-                <EditText
-                    android:id="@+id/etFirstName"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="60dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="First Name"
-                    android:textColor="#eeeeee"
-                    android:singleLine="true"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <!--LN-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="#bdbdbd"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-                <EditText
-                    android:id="@+id/etLastName"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="60dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="Last Name"
-                    android:textColor="#eeeeee"
-                    android:singleLine="true"/>
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <!--Birthdate and Gender-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <!--Birthdate-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="#bdbdbd"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-                <EditText
-                    android:id="@+id/etBirthdate"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="70dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="Birthdate"
-                    android:textColor="#eeeeee"
-                    android:singleLine="true"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <!--Gender-->
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Email and Password-->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorBGPrimary"
                 android:orientation="vertical">
-                <RadioGroup
-                    android:id="@+id/rdgGender"
-                    android:layout_width="wrap_content"
+
+                <!--Email Address-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginStart="8dp"
-                    android:orientation="horizontal"
-                    android:theme="@style/rdbTheme">
-                    <RadioButton
-                        android:id="@+id/rdbMale"
-                        android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="#bdbdbd"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Male"
-                        android:textColor="@color/colorAccent" />
-                    <RadioButton
-                        android:id="@+id/rdbFemale"
-                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="Email Address"
+                        android:inputType="textEmailAddress"
+                        android:textColor="#eeeeee"
+                        android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <!--Password-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#bdbdbd"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Female"
-                        android:textColor="@color/colorAccent" />
-                </RadioGroup>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textColor="#eeeeee"
+                        android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
 
-    <!--AL1 and City-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorBGPrimary"
-        android:orientation="horizontal">
+            <!--FN, LN, Birthdate, Gender-->
+            <LinearLayout
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorBGPrimary"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <!--AL1-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="#bdbdbd"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-                <EditText
-                    android:id="@+id/etAL1"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="60dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="Address Line 1"
-                    android:textColor="#eeeeee"
-                    android:singleLine="true"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <!--City-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="#bdbdbd"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-
-                <AutoCompleteTextView
-                    android:id="@+id/actvCity"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                <!--FN and LN-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="60dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="City"
-                    android:textColor="#eeeeee"
-                    android:singleLine="true"
-                    android:ems="10"/>
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-    </LinearLayout>
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="330dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
-        android:text="SUBMIT"
-        android:textColor="#eeeeee"
-        android:textSize="18sp"
-        android:background="@drawable/main_btn_bg"/>
+                    <!--FN-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#bdbdbd"
+                        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                        <EditText
+                            android:id="@+id/etFirstName"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="First Name"
+                            android:textColor="#eeeeee"
+                            android:singleLine="true"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--LN-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#bdbdbd"
+                        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                        <EditText
+                            android:id="@+id/etLastName"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Last Name"
+                            android:textColor="#eeeeee"
+                            android:singleLine="true"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!--Birthdate and Gender-->
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!--Birthdate-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#bdbdbd"
+                        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                        <EditText
+                            android:id="@+id/etBirthdate"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Birthdate"
+                            android:textColor="#eeeeee"
+                            android:singleLine="true"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Gender-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RadioGroup
+                            android:id="@+id/rdgGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginStart="8dp"
+                            android:orientation="horizontal"
+                            android:theme="@style/rdbTheme">
+                            <RadioButton
+                                android:id="@+id/rdbMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Male"
+                                android:textColor="@color/colorAccent" />
+                            <RadioButton
+                                android:id="@+id/rdbFemale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Female"
+                                android:textColor="@color/colorAccent" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--AL1 and City-->
+            <LinearLayout
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorBGPrimary"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!--AL1-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#bdbdbd"
+                        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                        <EditText
+                            android:id="@+id/etAL1"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".50"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="Address Line 1"
+                            android:textColor="#eeeeee"
+                            android:singleLine="true"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--City-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#bdbdbd"
+                        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvCity"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:hint="City"
+                            android:textColor="#eeeeee"
+                            android:singleLine="true"
+                            android:ems="10"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="330dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:text="SUBMIT"
+                android:textColor="#eeeeee"
+                android:textSize="18sp"
+                android:background="@drawable/main_btn_bg"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center"
+                android:text="By signing up an account, you agree to Sideline's"
+                android:textColor="#eeeeee"
+                android:textSize="14sp" />
+            <EditText
+                android:id="@+id/etTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorAccent"
+                android:enabled="true"
+                android:cursorVisible="false"
+                android:text="Terms and Conditions"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
 </LinearLayout>

@@ -8,6 +8,8 @@ import android.graphics.Typeface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -36,6 +38,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class loginActivity extends AppCompatActivity
 {
@@ -60,6 +63,7 @@ public class loginActivity extends AppCompatActivity
 
         // Make uneditable.
         etRecoverAccount.setFocusable(false);
+
     }
 
     private void changeFontFamily()
@@ -72,6 +76,7 @@ public class loginActivity extends AppCompatActivity
         tilEmail.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
         tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
     }
+
 
     @OnClick(R.id.btnLogin)
     public void loginUser()
@@ -144,7 +149,6 @@ public class loginActivity extends AppCompatActivity
                                     startActivity(intent);
                                     Log.e("loginUser:", "SUCCESS!" + message);
                                 }
-
                             }
                             catch(JSONException e)
                             {

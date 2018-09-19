@@ -71,7 +71,7 @@ public class validationUtil
     {
         String title = text.getText().toString();
 
-        if(title.length() < 30)
+        if(title.length() < 15)
         {
             return false;
         }
@@ -83,7 +83,7 @@ public class validationUtil
     {
         String description = text.getText().toString();
 
-        if(description.length() < 40)
+        if(description.length() < 20)
         {
             return false;
         }

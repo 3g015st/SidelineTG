@@ -37,7 +37,7 @@
                     android:layout_height="75dp"
                     android:src="@drawable/main_img_person"
                     app:civ_border_width="1dp"
-                    app:civ_border_color="@color/colorBGSecondary"/>
+                    app:civ_border_color="#ef5350"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -50,30 +50,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tasker Name"
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold"
                         android:textAllCaps="true"
-                        android:layout_margin="18dp"
-                        android:textColor="#4db6ac" />
-
-                    <TextView
-                        android:id="@+id/tvNumReviews"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Number of Reviews"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="18dp"
-                        android:textColor="#eeeeee" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        android:layout_weight=".90"
-                        android:layout_marginLeft="18dp"
-                        android:numStars="5"
-                        android:stepSize="0.1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/RatingBar"/>
+                        android:layout_margin="38dp"
+                        android:textColor="#ef5350" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -137,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight=".60"
-                    android:text="Message"
+                    android:text="Message: "
                     android:textSize="18sp"
                     android:textAllCaps="true"
                     android:layout_marginLeft="18dp"

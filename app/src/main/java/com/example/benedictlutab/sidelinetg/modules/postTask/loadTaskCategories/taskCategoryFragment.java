@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -39,7 +40,9 @@ public class taskCategoryFragment extends Fragment
 {
     @BindView(R.id.rv_taskcategory) RecyclerView recyclerView;
     @BindView(R.id.tvTitle) TextView tvTitle;
-    @BindView(R.id.ivEmpty) ImageView ivEmpty;
+    @BindView(R.id.tvEmpty) TextView tvEmpty;
+    @BindView(R.id.llShow) LinearLayout llShow;
+    @BindView(R.id.llEmpty) LinearLayout llEmpty;
 
     private View rootView;
     private int listSize;
@@ -60,7 +63,7 @@ public class taskCategoryFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        Log.e("onCreateView:","STARTED!");
+        Log.e("onCreateView: ","STARTED!");
 
         rootView = inflater.inflate(R.layout.posttask_fragment_task_category, container, false);
         ButterKnife.bind(this, rootView);
@@ -68,34 +71,38 @@ public class taskCategoryFragment extends Fragment
 
         // Change Font Style.
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/avenir.otf");
-        tvTitle.setTypeface(font);
+        tvTitle.setTypeface(font, Typeface.BOLD);
+        tvEmpty.setTypeface(font);
 
         return rootView;
     }
 
     private void initRecyclerView()
     {
+        Log.e("initRecyclerView: ","STARTED!");
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 2));
         adapterTaskCategories adapterTaskCategories = new adapterTaskCategories(getActivity().getApplicationContext(), taskCategoryList);
         recyclerView.setAdapter(adapterTaskCategories);
         if (listSize == 0)
         {
-            Log.e("initRecyclerView: ", "GONE-VISIBLE");
-            recyclerView.setVisibility(View.GONE);
-            ivEmpty.setVisibility(View.VISIBLE);
+            Log.e("initRecyclerView: ", "No task categories loaded!");
+            llShow.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
         }
         else
         {
-            Log.e("initRecyclerView: ", "VISIBLE-GONE");
-            recyclerView.setVisibility(View.VISIBLE);
-            ivEmpty.setVisibility(View.GONE);
+            Log.e("initRecyclerView: ", "Task categories loaded!");
+            llShow.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
         }
     }
 
     private void fetchTaskCategories()
     {
-        apiRouteUtil apiRouteUtil = new apiRouteUtil();
+        Log.e("fetchTaskCategories: ","STARTED!");
 
+        apiRouteUtil apiRouteUtil = new apiRouteUtil();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiRouteUtil.URL_LOAD_TASK_CATEGORIES, new Response.Listener<String>()
         {
             @Override
@@ -122,7 +129,7 @@ public class taskCategoryFragment extends Fragment
                 catch (JSONException e)
                 {
                     e.printStackTrace();
-                    Log.d("Catch Response: ", e.toString());
+                    Log.e("Catch Response: ", e.toString());
                 }
             }
         },
@@ -131,7 +138,7 @@ public class taskCategoryFragment extends Fragment
                     @Override
                     public void onErrorResponse(VolleyError volleyError)
                     {
-                        Log.d("Error Response: ", volleyError.toString());
+                        Log.e("Error Response: ", volleyError.toString());
                     }
                 });
         // Add the StringRequest to Queue.

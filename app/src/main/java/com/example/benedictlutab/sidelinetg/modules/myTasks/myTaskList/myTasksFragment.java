@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -45,6 +46,9 @@ public class myTasksFragment extends Fragment
 {
     @BindView(R.id.rv_mytasks) RecyclerView recyclerView;
     @BindView(R.id.tvItems) TextView tvItems;
+    @BindView(R.id.tvEmpty) TextView tvEmpty;
+    @BindView(R.id.llShow) LinearLayout llShow;
+    @BindView(R.id.llEmpty) LinearLayout llEmpty;
 
     private View rootView;
     private int listSize;
@@ -84,6 +88,7 @@ public class myTasksFragment extends Fragment
         // Change Font Style.
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/avenir.otf");
         tvItems.setTypeface(font);
+        tvEmpty.setTypeface(font);
 
         // Behave like ViewPager
         PagerSnapHelper snapHelper = new PagerSnapHelper();
@@ -96,19 +101,23 @@ public class myTasksFragment extends Fragment
 
     private void initRecyclerView()
     {
+        Log.e("initRecyclerView: ", "STARTED!");
+
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         adapterMyTasks adapterMyTasks = new adapterMyTasks(getActivity(), taskList);
         recyclerView.setAdapter(adapterMyTasks);
         if (listSize == 0)
         {
-            Log.e("initRecyclerView: ", "GONE-VISIBLE");
-            recyclerView.setVisibility(View.GONE);
+            Log.e("initRecyclerView: ", "No tasks loaded!");
+            llShow.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
         }
         else
         {
-            Log.e("initRecyclerView: ", "VISIBLE-GONE");
-            recyclerView.setVisibility(View.VISIBLE);
+            Log.e("initRecyclerView: ", "Tasks are loaded!");
+            llShow.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
 
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
             {
@@ -132,8 +141,9 @@ public class myTasksFragment extends Fragment
 
     private void fetchMyTasks()
     {
-        apiRouteUtil apiRouteUtil = new apiRouteUtil();
+        Log.e("fetchMyTasks: ", "STARTED!");
 
+        apiRouteUtil apiRouteUtil = new apiRouteUtil();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_MY_TASKS, new Response.Listener<String>()
         {
             @Override
@@ -150,7 +160,7 @@ public class myTasksFragment extends Fragment
                         taskList.add(new Task(jsonObject.getString("task_id"),
                                 jsonObject.getString("title"),
                                 jsonObject.getString("image_one"),
-                                jsonObject.getString("date_time_end"),
+                                jsonObject.getString("due_date"),
                                 jsonObject.getString("address"),
                                 jsonObject.getString("task_fee"),
                                 jsonObject.getString("status"))
@@ -163,7 +173,7 @@ public class myTasksFragment extends Fragment
                 catch (JSONException e)
                 {
                     e.printStackTrace();
-                    Log.d("Catch Response: ", e.toString());
+                    Log.e("CATCH RESPONSE: ", e.toString());
                 }
             }
         },
@@ -172,7 +182,7 @@ public class myTasksFragment extends Fragment
                     @Override
                     public void onErrorResponse(VolleyError volleyError)
                     {
-                        Log.d("Error Response: ", volleyError.toString());
+                        Log.e("ERROR RESPONSE: ", volleyError.toString());
                     }
                 })
     {

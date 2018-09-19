@@ -61,6 +61,7 @@ public class signupActivity extends AppCompatActivity
     @BindView(R.id.etLastName) EditText etLastName;
     @BindView(R.id.etBirthdate) EditText etBirthdate;
     @BindView(R.id.etAL1) EditText etAL1;
+    @BindView(R.id.etTerms) EditText etTerms;
     @BindView(R.id.rdgGender) RadioGroup rdgGender;
     @BindView(R.id.rdbMale) RadioButton rdbMale;
     @BindView(R.id.rdbFemale) RadioButton rdbFemale;
@@ -78,6 +79,7 @@ public class signupActivity extends AppCompatActivity
 
         // Make uneditable.
         etBirthdate.setFocusable(false);
+        etTerms.setFocusable(false);
 
         // Set date listener.
         DateSetListener = new DatePickerDialog.OnDateSetListener()
@@ -92,7 +94,6 @@ public class signupActivity extends AppCompatActivity
                 etBirthdate.setText(date);
             }
         };
-
         loadCities();
     }
 
@@ -210,8 +211,8 @@ public class signupActivity extends AppCompatActivity
         swalDialog.setTitleText("");
         swalDialog.setCancelable(false);
 
-        // This POST request shall validate if the email already exists
-        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_CHECK_EMAIL_EXISTS, new Response.Listener<String>()
+        // This POST request shall validate if the email or phone number already exists
+        StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_CHECK_EMAIL_MOBILE_EXISTS, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String ServerResponse)
@@ -244,8 +245,8 @@ public class signupActivity extends AppCompatActivity
                         }
                         case "ERROR":
                         {
-                            // If email already exists, try again.
-                            TastyToast.makeText(getApplicationContext(), "Email does exists", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                            // If email or mobile number already exists, try again.
+                            TastyToast.makeText(getApplicationContext(), "Email or mobile number does exists", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
                             break;
                         }
                         default:

@@ -57,6 +57,9 @@ public class accountKitActivity extends AppCompatActivity
         // Set default country code to PH.
         configurationBuilder.setDefaultCountryCode("PH");
 
+        configurationBuilder.setReceiveSMS(true);
+
+
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,configurationBuilder.build());
         startActivityForResult(intent, APP_REQUEST_CODE);
     }
@@ -83,6 +86,8 @@ public class accountKitActivity extends AppCompatActivity
     {
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>()
         {
+            Account account;
+
             @Override
             public void onSuccess(final Account account)
             {
@@ -100,6 +105,16 @@ public class accountKitActivity extends AppCompatActivity
             public void onError(final AccountKitError error)
             {
                 Log.e("getMobileNumber: ", error.toString());
+
+                // Get mobile number
+                PhoneNumber phoneNumber = account.getPhoneNumber();
+                if (phoneNumber != null)
+                {
+                    mobile_number = phoneNumber.toString();
+                    Log.e("Fetched P.Number: ", mobile_number);
+
+                    sendUserCredentials();
+                }
             }
         });
     }

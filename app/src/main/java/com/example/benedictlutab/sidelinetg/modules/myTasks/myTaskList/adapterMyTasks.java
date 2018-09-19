@@ -3,12 +3,14 @@ package com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.benedictlutab.sidelinetg.R;
@@ -18,6 +20,7 @@ import com.example.benedictlutab.sidelinetg.models.Task;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails.taskDetailsActivity;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,6 +35,7 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
 {
     public Activity context;
     public List<Task> taskList;
+    public Typeface font;
 
     public adapterMyTasks(Activity context, List<Task> taskList)
     {
@@ -47,7 +51,9 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
         if(view != null)
         {
             fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(view.getContext().getAssets(), "fonts/avenir.otf");
+            font = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/avenir.otf");
             fontStyleCrawler.replaceFonts((ViewGroup)view);
+
         }
         return new ViewHolder(view);
     }
@@ -63,7 +69,10 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
 
         // Bind data.
         holder.TASK_ID      = task.getTask_id();
+
         holder.tvTaskTitle.setText(task.getTitle());
+        holder.tvTaskTitle.setTypeface(font, Typeface.BOLD);
+
         holder.tvTaskAddress.setText(task.getAddress());
         holder.tvTaskDate.setText(task.getDate_time_end());
         holder.tvTaskStatus.setText(task.getStatus());
@@ -97,7 +106,7 @@ public class adapterMyTasks extends RecyclerView.Adapter<adapterMyTasks.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        @BindView(R.id.llMyTask) LinearLayout llMyTask;
+        @BindView(R.id.llMyTask) RelativeLayout llMyTask;
         @BindView(R.id.civTaskPhoto) CircleImageView civTaskPhoto;
         @BindView(R.id.tvTaskTitle) TextView tvTaskTitle;
         @BindView(R.id.tvTaskAddress) TextView tvTaskAddress;

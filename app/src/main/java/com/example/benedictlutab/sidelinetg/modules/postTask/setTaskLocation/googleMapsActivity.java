@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -42,6 +43,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -198,7 +200,7 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
                     {
                         if(task.isSuccessful() && task.getResult() != null)
                         {
-                            Log.e("getDeviceLocation: ", "found");
+                            Log.e("getDeviceLocation: ", "LOCATION FOUND!");
                             Location currentLocation = (Location) task.getResult();
 
                             // Geo locate
@@ -318,7 +320,7 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     private void geoLocate()
     {
-        Log.e("geoLocate:", "Geolocating - STARTED!");
+        Log.e("geoLocate: ", "Geolocating - STARTED!");
 
         String searchString = actvSearchLocation.getText().toString();
 
@@ -331,7 +333,7 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
         }
         catch(IOException ex)
         {
-            Log.e("geoLocation(EX):", ex.toString());
+            Log.e("geoLocation(EX): ", ex.toString());
         }
 
         if(list.size() > 0)
@@ -347,7 +349,7 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
             // Move camera to the found location
             moveCamera(new LatLng(latitude, longitude), DEFAULT_ZOOM);
             Log.e("ADDRESS:", line_one);
-            Log.e("CITY: ", city);
+
             Log.e("LAT: ", Double.toString(latitude));
             Log.e("LONG: ",  Double.toString(longitude));
         }
@@ -375,6 +377,9 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
         String regex_mm = "\\s*\\b, Metro Manila\\b\\s*";
         line_one = line_one.replaceAll(regex_mm, "");
+
+        String regex_mynl = "\\s*\\b, Maynila\\b\\s*";
+        line_one = line_one.replaceAll(regex_mynl, "Manila");
     }
 
     private void hideKeyboard()
@@ -388,6 +393,4 @@ public class googleMapsActivity extends AppCompatActivity implements OnMapReadyC
         fontStyleCrawler fontStyleCrawler = new fontStyleCrawler(getAssets(), "fonts/avenir.otf");
         fontStyleCrawler.replaceFonts((ViewGroup)this.findViewById(android.R.id.content));
     }
-
-
 }

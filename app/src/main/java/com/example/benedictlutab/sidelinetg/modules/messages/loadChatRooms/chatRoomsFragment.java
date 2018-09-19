@@ -3,6 +3,7 @@ package com.example.benedictlutab.sidelinetg.modules.messages.loadChatRooms;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -41,14 +43,17 @@ import butterknife.ButterKnife;
 public class chatRoomsFragment extends Fragment
 {
     @BindView(R.id.rv_chatroom) RecyclerView recyclerView;
+    @BindView(R.id.tvEmpty) TextView tvEmpty;
+    @BindView(R.id.llShow) LinearLayout llShow;
+    @BindView(R.id.llEmpty) LinearLayout llEmpty;
 
     private View rootView;
     private int listSize;
     private List<ChatRoom> chatRoomList = new ArrayList<>();
 
     private adapterChatRooms adapterChatRooms;
-
     private SharedPreferences sharedPreferences;
+
     private String USER_ID;
 
     public static chatRoomsFragment newInstance()
@@ -66,7 +71,7 @@ public class chatRoomsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        Log.e("onCreateView:","STARTED!");
+        Log.e("onCreateView: ","STARTED!");
 
         rootView = inflater.inflate(R.layout.loadchatrooms_fragment_chat_rooms, container, false);
         ButterKnife.bind(this, rootView);
@@ -79,6 +84,10 @@ public class chatRoomsFragment extends Fragment
             Log.e("USER_ID: ", USER_ID);
         }
 
+        // Change Font Style.
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/avenir.otf");
+        tvEmpty.setTypeface(font);
+
         fetchChatRooms();
 
         return rootView;
@@ -86,7 +95,7 @@ public class chatRoomsFragment extends Fragment
 
     private void initRecyclerView()
     {
-        Log.d("listSize: ", String.valueOf(listSize));
+        Log.e("initRecyclerView: ", "STARTED!");
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -97,20 +106,23 @@ public class chatRoomsFragment extends Fragment
 
         if (listSize == 0)
         {
-            Log.d("initRecyclerView: ", "GONE-VISIBLE");
-            recyclerView.setVisibility(View.GONE);
+            Log.e("initRecyclerView: ", "No messages loaded!");
+            llShow.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
         }
         else
         {
-            Log.d("initRecyclerView: ", "VISIBLE-GONE");
-            recyclerView.setVisibility(View.VISIBLE);
+            Log.e("initRecyclerView: ", "Messages are loaded!");
+            llShow.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
         }
     }
 
     private void fetchChatRooms()
     {
-        apiRouteUtil apiRouteUtil = new apiRouteUtil();
+        Log.e("fetchChatRooms: ", "STARTED!");
 
+        apiRouteUtil apiRouteUtil = new apiRouteUtil();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOAD_CHAT_ROOMS, new Response.Listener<String>()
         {
             @Override
@@ -140,7 +152,7 @@ public class chatRoomsFragment extends Fragment
                 catch (JSONException e)
                 {
                     e.printStackTrace();
-                    Log.d("Catch Response: ", e.toString());
+                    Log.e("CATCH RESPONSE: ", e.toString());
                 }
             }
         },
@@ -149,7 +161,7 @@ public class chatRoomsFragment extends Fragment
                     @Override
                     public void onErrorResponse(VolleyError volleyError)
                     {
-                        Log.d("Error Response: ", volleyError.toString());
+                        Log.e("ERROR RESPONSE: ", volleyError.toString());
                     }
                 })
         {

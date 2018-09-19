@@ -2,6 +2,7 @@ package com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskOffers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -44,6 +46,10 @@ public class taskOffersActivity extends AppCompatActivity
     @BindView(R.id.tvOffers) TextView tvOffers;
     @BindView(R.id.swipeRefLayout_id) SwipeRefreshLayout swipeRefLayout;
 
+    @BindView(R.id.tvEmpty) TextView tvEmpty;
+    @BindView(R.id.llShow) LinearLayout llShow;
+    @BindView(R.id.llEmpty) LinearLayout llEmpty;
+
     private String TASK_ID, USER_ID;
     private adapterDisplayOffers adapterDisplayOffers;
 
@@ -75,6 +81,9 @@ public class taskOffersActivity extends AppCompatActivity
             Log.e("USER_ID:", USER_ID);
         }
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/avenir.otf");
+        tvEmpty.setTypeface(font);
+
         initSwipeRefLayout();
     }
 
@@ -92,7 +101,7 @@ public class taskOffersActivity extends AppCompatActivity
 
     private void initRecyclerView()
     {
-        Log.d("listSize: ", String.valueOf(listSize));
+        Log.d("initRecyclerView: ", "STARTED!");
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -103,13 +112,15 @@ public class taskOffersActivity extends AppCompatActivity
 
         if (listSize == 0)
         {
-            Log.d("initRecyclerView: ", "GONE-VISIBLE");
-            recyclerView.setVisibility(View.GONE);
+            Log.e("initRecyclerView: ", "No task offers loaded!");
+            llShow.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
         }
         else
         {
-            Log.d("initRecyclerView: ", "VISIBLE-GONE");
-            recyclerView.setVisibility(View.VISIBLE);
+            Log.e("initRecyclerView: ", "Offers loaded!");
+            llShow.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
         }
 
         tvOffers.setText("OFFERS" +" ("+Integer.toString(listSize)+")");
@@ -142,11 +153,10 @@ public class taskOffersActivity extends AppCompatActivity
 
     private void fetchTaskOffers()
     {
-        Log.e("fetchAVTasks: ", "STARTED !");
+        Log.e("fetchTaskOffers  : ", "STARTED !");
         offerList.clear();
 
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_TASK_OFFERS, new Response.Listener<String>()
         {
             @Override
@@ -165,8 +175,6 @@ public class taskOffersActivity extends AppCompatActivity
                                 jsonObject.getString("profile_picture"),
                                 jsonObject.getString("first_name"),
                                 jsonObject.getString("last_name"),
-                                jsonObject.getString("rating"),
-                                jsonObject.getString("reviews"),
                                 jsonObject.getString("amount"),
                                 jsonObject.getString("message"))
                         );
@@ -178,7 +186,7 @@ public class taskOffersActivity extends AppCompatActivity
                 catch (JSONException e)
                 {
                     e.printStackTrace();
-                    Log.d("Catch Response: ", e.toString());
+                    Log.e("CATCH RESPONSE: ", e.toString());
 
                 }
                 swipeRefLayout.setRefreshing(false);
@@ -189,7 +197,7 @@ public class taskOffersActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError volleyError)
                     {
-                        Log.d("Error Response: ", volleyError.toString());
+                        Log.e("ERROR RESPONSE: ", volleyError.toString());
                         swipeRefLayout.setRefreshing(false);
                     }
                 })

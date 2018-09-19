@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:id="@+id/llMyTask"
-    android:layout_width="360dp"
-    android:layout_height="570sp"
-    android:padding="8sp">
+    android:layout_width="380dp"
+    android:layout_height="600sp"
+    android:padding="10sp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="340dp"
-        android:layout_height="550dp"
-        android:layout_margin="35dp"
+        android:layout_width="320dp"
+        android:layout_gravity="center"
+        android:layout_height="510dp"
+        android:layout_margin="30dp"
         app:cardBackgroundColor="@color/colorBGPrimary"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
+            android:clipToPadding="false"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <!--TASK IMAGE-->
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/civTaskPhoto"
                 android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_margin="8dp"
                 android:src="@drawable/main_img_photo" />
             <!--TITLE-->
             <TextView
@@ -42,7 +46,7 @@
                 android:text="Task Title"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="16dp" />
+                android:textSize="20sp" />
             <View
                 android:layout_below="@id/tvTaskTitle"
                 android:layout_width="match_parent"
@@ -57,8 +61,9 @@
                 android:layout_below="@id/tvTaskTitle"
                 android:layout_marginTop="18dp"
                 android:layout_marginLeft="10dp"
+                android:maxLength="35"
                 android:text="Task Address"
-                android:textSize="14dp"
+                android:textSize="15sp"
                 android:textColor="#eeeeee"/>
             <!--TASK DATE-->
             <TextView
@@ -68,7 +73,7 @@
                 android:layout_below="@id/tvTaskAddress"
                 android:layout_marginLeft="10dp"
                 android:text="Task Date"
-                android:textSize="14dp"
+                android:textSize="15sp"
                 android:textColor="#eeeeee"/>
             <TextView
                 android:id="@+id/tvTaskStatus"
@@ -78,13 +83,15 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:text="Task Status"
-                android:textSize="14dp"
+                android:textSize="15sp"
                 android:textColor="#eeeeee"/>
+
             <!--PAYMENT-->
-            <RelativeLayout
+            <LinearLayout
                 android:layout_below="@id/tvTaskStatus"
+                android:layout_gravity="bottom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:layout_marginTop="25dp"
                 android:background="@color/colorPrimaryLight">
                 <TextView
@@ -92,14 +99,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Task Payment"
-                    android:textSize="17dp"
-                    android:layout_margin="9dp"
+                    android:textSize="20sp"
+                    android:layout_margin="15dp"
                     android:textAllCaps="true"
                     android:textColor="@color/colorFontPrimary"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"/>
-
-            </RelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+</RelativeLayout>

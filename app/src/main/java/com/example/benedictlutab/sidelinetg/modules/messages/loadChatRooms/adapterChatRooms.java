@@ -67,7 +67,7 @@ public class adapterChatRooms extends RecyclerView.Adapter<adapterChatRooms.View
 
         Log.e("IDs: ", holder.TASK_GIVER_ID + holder.TASKER_ID + holder.TASK_ID);
 
-        holder.tvTaskerName.setText(chatRoom.getFirst_name() +" "+ chatRoom.getLast_name().substring(0, 1));
+        holder.tvTaskerName.setText(chatRoom.getFirst_name() +" "+ chatRoom.getLast_name().substring(0, 1)+".");
         holder.tvTaskName.setText(chatRoom.getTitle());
 
         holder.IMAGE_URL = apiRouteUtil.DOMAIN + chatRoom.getProfile_picture();

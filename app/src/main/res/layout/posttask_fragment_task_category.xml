@@ -2,36 +2,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBGSecondary"
     tools:context=".modules.postTask.loadTaskCategories.taskCategoryFragment">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="What kind of casual service do you need?"
-        android:textSize="17dp"
-        android:textColor="@color/colorFontPrimary"
-        android:layout_gravity="top"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="50dp"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="40dp"
+    <LinearLayout
+        android:id="@+id/llShow"
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="640dp"
-        android:id="@+id/rv_taskcategory"
-        tools:layout_editor_absoluteX="745dp"
-        tools:layout_editor_absoluteY="-51dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What kind of casual service do you need?"
+            android:textSize="17dp"
+            android:textColor="@color/colorFontPrimary"
+            android:layout_gravity="top|center"
+            android:layout_margin="35dp"/>
 
-    <ImageView
-        android:id="@+id/ivEmpty"
-        android:layout_marginTop="35dp"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="640dp"
+            android:id="@+id/rv_taskcategory"
+            tools:layout_editor_absoluteX="745dp"
+            tools:layout_editor_absoluteY="-51dp">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <!--IF EMPTY-->
+    <LinearLayout
+        android:id="@+id/llEmpty"
+        android:gravity="center"
         android:visibility="gone"
-        android:background="@drawable/main_img_empty"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <ImageView
+            android:layout_marginTop="25dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:background="@drawable/main_img_empty"/>
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Sorry, there are no task categories to be displayed :("
+            android:textSize="16sp"
+            android:textColor="@color/colorFontPrimary"
+            android:layout_gravity="top"
+            android:layout_marginTop="15dp"
+            android:layout_margin="35dp"/>
+    </LinearLayout>
 </FrameLayout>

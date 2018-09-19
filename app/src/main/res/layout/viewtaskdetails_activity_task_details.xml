@@ -91,7 +91,7 @@
                             android:layout_width="55dp"
                             android:layout_height="55dp"
                             android:src="@drawable/main_img_person"
-                            app:civ_border_color="#616161"
+                            app:civ_border_color="@color/colorAccent"
                             app:civ_border_width="1dp" />
 
                         <TextView
@@ -100,8 +100,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="14dp"
                             android:text="Task Giver Name"
-                            android:textColor="@color/colorFontPrimary"
-                            android:textSize="15sp" />
+                            android:textColor="@color/colorAccent"
+                            android:textAllCaps="true"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <View
@@ -253,7 +254,7 @@
                             android:layout_toEndOf="@+id/civTaskerPhoto"
                             android:text="None"
                             android:textAllCaps="true"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="#ef5350"
                             android:textSize="18sp" />
                     </RelativeLayout>
 
@@ -264,6 +265,18 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="50dp"
                         android:text="View Offers"
+                        android:textColor="#eeeeee"
+                        android:textSize="18sp"
+                        android:background="@drawable/main_btn_bg"/>
+                    <!--MARK TASK AS COMPLETED-->
+                    <Button
+                        android:id="@+id/btnMarkComplete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="MARK TASK AS COMPLETED"
                         android:textColor="#eeeeee"
                         android:textSize="18sp"
                         android:background="@drawable/main_btn_bg"/>

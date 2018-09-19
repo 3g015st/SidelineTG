@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -59,6 +60,7 @@ public class postTaskActivity extends AppCompatActivity
 {
     @BindView(R.id.btnBack) Button btnBack;
     @BindView(R.id.btnPost) Button btnPost;
+    @BindView(R.id.btnRemoveImages) Button btnRemoveImages;
 
     @BindView(R.id.tvTaskCategory) TextView tvTaskCategory;
 
@@ -164,6 +166,48 @@ public class postTaskActivity extends AppCompatActivity
             case R.id.btnPost:
                 submitTask();
                 break;
+        }
+    }
+
+    @OnClick(R.id.btnRemoveImages)
+    public void removeImages()
+    {
+        if(bitmap_one != null && bitmap_two != null)
+        {
+            Log.e("IMAGES: ", "MAKE BOTH EMPTY!");
+            TastyToast.makeText(this, "Both images have been removed", TastyToast.LENGTH_LONG, TastyToast.WARNING).show();
+
+            String imageOneData = "";
+            String imageTwoData = "";
+
+            ivImageOne.setImageDrawable(null);
+            ivImageTwo.setImageDrawable(null);
+
+            bitmap_one = null;
+            bitmap_two = null;
+        }
+        else if(bitmap_one != null) //If bitmap_one is not null
+        {
+            Log.e("IMAGES: ", "MAKE IMAGE ONE EMPTY");
+            TastyToast.makeText(this, "Image one has been removed", TastyToast.LENGTH_LONG, TastyToast.WARNING).show();
+
+            String imageOneData = "";
+
+            ivImageOne.setImageDrawable(null);
+
+            bitmap_one = null;
+        }
+
+        else if(bitmap_two != null) // If bitmap_two is not null
+        {
+            Log.e("IMAGES: ", "MAKE IMAGE TWO EMPTY");
+            TastyToast.makeText(this, "Image two has been removed", TastyToast.LENGTH_LONG, TastyToast.WARNING).show();
+
+            String imageTwoData = "";
+
+            ivImageTwo.setImageDrawable(null);
+
+            bitmap_two = null;
         }
     }
 
@@ -342,7 +386,7 @@ public class postTaskActivity extends AppCompatActivity
 
         // Get min and max date
         long CURRENT_DATE = System.currentTimeMillis();
-        long LAST_DATE    = getLastTimeStampOfCurrentMonth(month,year);
+        long LAST_DATE    = getLastTimeStampOfCurrentMonth(month + 1, year);
 
         DatePickerDialog dialog = new DatePickerDialog(postTaskActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateSetListener, year,month,day);
         dialog.getDatePicker().setMinDate(CURRENT_DATE);
@@ -368,12 +412,12 @@ public class postTaskActivity extends AppCompatActivity
 
         if(!validationUtil.isValidTaskTitle(etTaskTitle))
         {
-            etTaskTitle.setError("Task title is less than 30 characters!");
+            etTaskTitle.setError("Task title is less than 15 characters!");
             ERROR_COUNT = true;
         }
         if(!validationUtil.isValidTaskDescription(etDescription))
         {
-            etDescription.setError("Description is less than 40 characters!");
+            etDescription.setError("Description is less than 20 characters!");
             ERROR_COUNT = true;
         }
         if(validationUtil.isEmpty(etTaskPayment))
@@ -404,7 +448,7 @@ public class postTaskActivity extends AppCompatActivity
 
     private void sendRequest()
     {
-        Log.e("sendRequest: ", "START!");
+        Log.e("sendRequest: ", "STARTED!");
         Log.e("CITY: ", city);
         Log.e("LAT: ", latitude);
         Log.e("LONG: ", longitude);
@@ -412,10 +456,12 @@ public class postTaskActivity extends AppCompatActivity
         // Get route obj.
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
+        RequestQueue requestQueue = Volley.newRequestQueue(postTaskActivity.this);
+
         // Init loading dialog.
         final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        swalDialog.setTitleText("");
+        swalDialog.setContentText("Please wait while we are posting your task :)");
         swalDialog.setCancelable(false);
 
         StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_POST_TASK,
@@ -428,7 +474,7 @@ public class postTaskActivity extends AppCompatActivity
                         String SERVER_RESPONSE = ServerResponse.replaceAll("\\s+","");
                         Log.e("RESPONSE: ", SERVER_RESPONSE);
 
-                        if(SERVER_RESPONSE.equals("SUCCESS"))
+                        if(SERVER_RESPONSE.equals("SUCCESSSUCCESS") || SERVER_RESPONSE.equals("SUCCESS"))
                         {
                             // Exit this activity then prompt success
                             swalDialog.hide();
@@ -439,7 +485,7 @@ public class postTaskActivity extends AppCompatActivity
                         {
                             // Prompt error
                             swalDialog.hide();
-                            TastyToast.makeText(getApplicationContext(), "There has been an error posting your task!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                            TastyToast.makeText(getApplicationContext(), "There has been an error posting your task!", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
                         }
                     }
                 },
@@ -450,7 +496,20 @@ public class postTaskActivity extends AppCompatActivity
                     {
                         // Showing error message if something goes wrong.
                         swalDialog.hide();
-                        Log.e("Error Response:", volleyError.toString());
+                        Log.e("ERROR RESPONSE: ", volleyError.toString());
+                        // No network connection.
+                        new SweetAlertDialog(postTaskActivity.this, SweetAlertDialog.ERROR_TYPE).setTitleText("Connection Timeout").setContentText("There seems to have a connection error, please try again later. :(")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+                                {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog)
+                                    {
+                                        // Exit application.
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
                 })
         {
@@ -461,15 +520,33 @@ public class postTaskActivity extends AppCompatActivity
                 Map<String, String> Parameter = new HashMap<String, String>();
 
                 // Convert to BASE64
-                String imageOneData = imageToString(bitmap_one);
-                String imageTwoData = imageToString(bitmap_two);
+                if(bitmap_one != null && bitmap_two != null)
+                {
+                    Log.e("IMAGES: ", "BOTH ARE NOT NULL!");
+                    String imageOneData = imageToString(bitmap_one);
+                    String imageTwoData = imageToString(bitmap_two);
+                    Parameter.put("image_one", imageOneData);
+                    Parameter.put("image_two", imageTwoData);
+                }
+                else if(bitmap_one != null) //If bitmap_one is not null
+                {
+                    Log.e("IMAGES: ", "IMAGE ONE IS NOT NULL!");
+                    String imageOneData = imageToString(bitmap_one);
+                    Log.e("imageOneData: ", imageOneData);
+                    Parameter.put("image_one", imageOneData);
+                }
 
-                Parameter.put("image_one", imageOneData);
-                Parameter.put("image_two", imageTwoData);
+                else if(bitmap_two != null) // If bitmap_two is not null
+                {
+                    Log.e("IMAGES: ", "IMAGE TWO IS NOT NULL!");
+                    String imageTwoData = imageToString(bitmap_two);
+                    Log.e("imageTwoData: ", imageTwoData);
+                    Parameter.put("image_two", imageTwoData);
+                }
 
                 Parameter.put("title", etTaskTitle.getText().toString());
                 Parameter.put("description", etDescription.getText().toString());
-                Parameter.put("date_time_end", etTaskDate.getText().toString());
+                Parameter.put("due_date", etTaskDate.getText().toString());
                 Parameter.put("task_fee", etTaskPayment.getText().toString());
                 Parameter.put("task_giver_id", USER_ID);
                 Parameter.put("task_category_id", TASK_CATEGORY_ID);
@@ -481,8 +558,10 @@ public class postTaskActivity extends AppCompatActivity
                 return Parameter;
             }
         };
-        // Initialize requestQueue.
-        RequestQueue requestQueue = Volley.newRequestQueue(postTaskActivity.this);
+        StringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         // Send the StringRequest to the requestQueue.
         requestQueue.add(StringRequest);

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +24,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.models.Offer;
+import com.example.benedictlutab.sidelinetg.modules.viewTaskerProfile.taskerProfileActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
@@ -30,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,11 +81,9 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         holder.TASK_ID   = offer.getTask_id();
         holder.amount    = offer.getAmount();
 
-        holder.tvTaskerName.setText(offer.getFirst_name() +" "+ offer.getLast_name().substring(0, 1));
-        holder.tvNumReviews.setText(offer.getReviews() + " Reviews");
+        holder.tvTaskerName.setText(offer.getFirst_name() +" "+ offer.getLast_name().substring(0, 1)+".");
         holder.tvAmount.setText("PHP " + offer.getAmount());
         holder.tvMessage.setText(offer.getMessage());
-        holder.ratingBar.setRating(Float.parseFloat(offer.getRating() + 2.5f));
 
         holder.IMAGE_URL = apiRouteUtil.DOMAIN + offer.getProfile_picture();
         Log.e("IMAGE URL: ", holder.IMAGE_URL);
@@ -127,6 +128,18 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
                         .show();
             }
         });
+
+        // Go to Tasker Profile
+        holder.civTaskerPhoto.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context, taskerProfileActivity.class);
+                intent.putExtra("USER_ID", holder.TASKER_ID);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -138,11 +151,9 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         @BindView(R.id.tvTaskerName) TextView tvTaskerName;
-        @BindView(R.id.tvNumReviews) TextView tvNumReviews;
         @BindView(R.id.tvAmount) TextView tvAmount;
         @BindView(R.id.tvMessage) TextView tvMessage;
         @BindView(R.id.civTaskerPhoto) CircleImageView civTaskerPhoto;
-        @BindView(R.id.ratingBar) RatingBar ratingBar;
         @BindView(R.id.llAccept) LinearLayout llAccept;
 
         private String TASK_ID, TASKER_ID, IMAGE_URL, amount;
@@ -162,7 +173,8 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         // Init loading dialog.
         final SweetAlertDialog swalDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
         swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        swalDialog.setTitleText("");
+        swalDialog.setTitleText(" ");
+        swalDialog.setContentText("Please wait while we are assigning your tasker :)");
         swalDialog.setCancelable(false);
 
         StringRequest StringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_ASSIGN_TASKER,
@@ -175,7 +187,7 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
                         String SERVER_RESPONSE = ServerResponse.replaceAll("\\s+","");
                         Log.e("RESPONSE: ", SERVER_RESPONSE);
 
-                        if(SERVER_RESPONSE.equals("SUCCESS"))
+                        if(SERVER_RESPONSE.contains("SUCCESS"))
                         {
                             // Exit this activity then prompt success
                             swalDialog.hide();
@@ -220,10 +232,17 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         // Initialize requestQueue.
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
+        StringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(20),
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         // Send the StringRequest to the requestQueue.
         requestQueue.add(StringRequest);
 
         // Display progress dialog.
         swalDialog.show();
     }
+
+
 }
