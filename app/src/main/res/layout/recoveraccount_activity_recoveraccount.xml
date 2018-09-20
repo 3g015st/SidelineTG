@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBGSecondary"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.recoverAccount.recoverAccountActivity">
+
+    <!--App Bar/Title Bar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryLight"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_img_back" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Recover your account"
+                android:textAllCaps="true"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--SEARCH EMAIL LAYOUT-->
+    <LinearLayout
+        android:layout_marginTop="75dp"
+        android:id="@+id/llSearchEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:textColorHint="#bdbdbd"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="Please enter your email to search for your account"
+                android:textColor="#eeeeee"
+                android:textSize="15dp"
+                android:inputType="textFilter"
+                android:maxLength="200"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_gravity="center"
+            android:layout_width="370dp"
+            android:layout_height="55dp"
+            android:layout_margin="150dp"
+            android:text="CONTINUE"
+            android:textColor="#eeeeee"
+            android:textSize="18sp"
+            android:background="@drawable/main_btn_bg"/>
+
+    </LinearLayout>
+
+    <!--VERIFY CODE LAYOUT-->
+    <LinearLayout
+        android:layout_marginTop="75dp"
+        android:id="@+id/llVerifyCode"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:textColorHint="#bdbdbd"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="Please enter the 6-digit code that we sent to your email."
+                android:textColor="#eeeeee"
+                android:textSize="15dp"
+                android:inputType="textFilter"
+                android:maxLength="6"
+                android:lines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnVerify"
+            android:layout_gravity="center"
+            android:layout_width="370dp"
+            android:layout_height="55dp"
+            android:layout_margin="150dp"
+            android:text="Verify"
+            android:textColor="#eeeeee"
+            android:textSize="18sp"
+            android:background="@drawable/main_btn_bg"/>
+
+    </LinearLayout>
+
+    <!--NEW PASSWORD LAYOUT-->
+    <LinearLayout
+        android:layout_marginTop="75dp"
+        android:id="@+id/llNewPassword"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#bdbdbd"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:hint="Enter a new password"
+                android:textColor="#eeeeee"
+                android:backgroundTint="@color/colorAccent"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnChangePassword"
+            android:layout_gravity="center"
+            android:layout_width="370dp"
+            android:layout_height="55dp"
+            android:layout_margin="150dp"
+            android:text="Change Password"
+            android:textColor="#eeeeee"
+            android:textSize="18sp"
+            android:background="@drawable/main_btn_bg"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

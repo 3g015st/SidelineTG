@@ -24,6 +24,7 @@ import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.helpers.validationUtil;
+import com.example.benedictlutab.sidelinetg.modules.recoverAccount.recoverAccountActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -63,7 +64,6 @@ public class loginActivity extends AppCompatActivity
 
         // Make uneditable.
         etRecoverAccount.setFocusable(false);
-
     }
 
     private void changeFontFamily()
@@ -77,6 +77,12 @@ public class loginActivity extends AppCompatActivity
         tilPassword.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/avenir.otf"));
     }
 
+    @OnClick(R.id.etRecoverAccount)
+    public void goToRecoverAccount()
+    {
+        Intent intent = new Intent(this, recoverAccountActivity.class);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.btnLogin)
     public void loginUser()

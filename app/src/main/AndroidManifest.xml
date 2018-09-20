@@ -67,7 +67,7 @@
         <activity android:name=".modules.myTasks.viewTaskOffers.taskOffersActivity" />
         <activity android:name=".modules.viewTaskerProfile.taskerProfileActivity" />
         <activity android:name=".modules.changePassword.changePasswordActivity" />
-        <activity android:name=".modules.recoverAccount.searchEmailActivity"></activity>
+        <activity android:name=".modules.recoverAccount.recoverAccountActivity"></activity>
     </application>
 
 </manifest>

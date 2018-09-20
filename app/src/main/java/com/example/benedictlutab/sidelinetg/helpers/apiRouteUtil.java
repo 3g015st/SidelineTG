@@ -7,7 +7,7 @@ package com.example.benedictlutab.sidelinetg.helpers;
 public class apiRouteUtil
 {
     // Set domain
-    public String DOMAIN = "http://192.168.0.100/Sideline/admin_area/";
+    public String DOMAIN = "http://192.168.0.101/Sideline/admin_area/";
 //    public String DOMAIN = "http://169.254.253.97/Sideline/";
 //    public String DOMAIN = "http://192.168.43.218/Sideline/admin_area/";
 //    public String DOMAIN = "http://192.168.0.36/Sideline/";
@@ -34,5 +34,8 @@ public class apiRouteUtil
     public String URL_CHANGE_PASS                  = DOMAIN + "api/common/changePassword.php";
 
     // RECOVER ACCOUNT
-
+    public String URL_SEARCH_EMAIL                 = DOMAIN + "api/common/recoverAccount/searchEmail.php";
+    public String URL_SEND_VERIFICATION_CODE       = DOMAIN + "api/common/recoverAccount/sendVerificationCode.php";
+    public String URL_VERIFY_CODE                  = DOMAIN + "api/common/recoverAccount/verifyCode.php";
+    public String URL_CHANGE_PASSWORD              = DOMAIN + "api/common/recoverAccount/changePassword.php";
 }
