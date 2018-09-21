@@ -191,8 +191,6 @@ public class postTaskActivity extends AppCompatActivity
             Log.e("IMAGES: ", "MAKE IMAGE ONE EMPTY");
             TastyToast.makeText(this, "Image one has been removed", TastyToast.LENGTH_LONG, TastyToast.WARNING).show();
 
-            String imageOneData = "";
-
             ivImageOne.setImageDrawable(null);
 
             bitmap_one = null;
@@ -202,8 +200,6 @@ public class postTaskActivity extends AppCompatActivity
         {
             Log.e("IMAGES: ", "MAKE IMAGE TWO EMPTY");
             TastyToast.makeText(this, "Image two has been removed", TastyToast.LENGTH_LONG, TastyToast.WARNING).show();
-
-            String imageTwoData = "";
 
             ivImageTwo.setImageDrawable(null);
 

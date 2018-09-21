@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 public class moreFragment extends Fragment
 {
-
     private ArrayList<String> arrlistItemNames = new ArrayList<>();
 
     public static moreFragment newInstance()
@@ -54,6 +53,7 @@ public class moreFragment extends Fragment
     {
         Log.d("moreFragment","initItemNames: on");
         arrlistItemNames.add("Change Password");
+        arrlistItemNames.add("Update Profile Information");
         arrlistItemNames.add("Terms and Conditions");
         arrlistItemNames.add("History");
         arrlistItemNames.add("Sign out");

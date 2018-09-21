@@ -15,6 +15,7 @@ import com.example.benedictlutab.sidelinetg.modules.messages.loadChatRooms.chatR
 import com.example.benedictlutab.sidelinetg.modules.more.moreFragment;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.myTaskList.myTasksFragment;
 import com.example.benedictlutab.sidelinetg.modules.postTask.loadTaskCategories.taskCategoryFragment;
+import com.example.benedictlutab.sidelinetg.modules.viewMyProfile.myProfileFragment;
 
 public class homeActivity extends AppCompatActivity
 {
@@ -43,6 +44,9 @@ public class homeActivity extends AppCompatActivity
                         break;
                     case R.id.action_tasks:
                         fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, myTasksFragment.newInstance()).commit();
+                        break;
+                    case R.id.action_profile:
+                        fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, myProfileFragment.newInstance()).commit();
                         break;
                     case R.id.action_more:
                         fragmentManager.beginTransaction().replace(R.id.frmlayout_fragment, moreFragment.newInstance()).commit();

@@ -7,10 +7,11 @@ package com.example.benedictlutab.sidelinetg.helpers;
 public class apiRouteUtil
 {
     // Set domain
-    public String DOMAIN = "http://192.168.0.101/Sideline/admin_area/";
+//    public String DOMAIN = "http://192.168.0.101/Sideline/admin_area/";
 //    public String DOMAIN = "http://169.254.253.97/Sideline/";
 //    public String DOMAIN = "http://192.168.43.218/Sideline/admin_area/";
 //    public String DOMAIN = "http://192.168.0.36/Sideline/";
+    public String DOMAIN = "http://192.168.1.9/Sideline/admin_area/";
 
     // Routes
     public String URL_CHECK_EMAIL_MOBILE_EXISTS    = DOMAIN + "api/taskgiver/isEmailOrMobileExists.php";
@@ -23,6 +24,7 @@ public class apiRouteUtil
     public String URL_LOAD_CHAT_ROOMS              = DOMAIN + "api/taskgiver/loadChatRooms.php";
     public String URL_ASSIGNED_TASKER              = DOMAIN + "api/taskgiver/fetchAssignedTasker.php";
     public String URL_MARK_COMPLETE                = DOMAIN + "api/taskgiver/markAsCompleted.php";
+    public String URL_UPDATE_PROF_INFO             = DOMAIN + "api/taskgiver/updateProfileInformation.php";
 
     public String URL_TASKER_SKILLS                = DOMAIN + "api/tasker/mySkills.php";
 
@@ -30,8 +32,9 @@ public class apiRouteUtil
     public String URL_CANCEL_TASK                  = DOMAIN + "api/common/cancelTask.php";
     public String URL_LOGIN                        = DOMAIN + "api/common/login.php";
     public String URL_CHECK_CONNECTION             = DOMAIN + "api/common/checkConnection.php";
-    public String URL_PROFILE_DETAILS              = DOMAIN + "api/common/viewProfileDetails.php";
+    public String URL_PROFILE_DETAILS              = DOMAIN + "api/common/loadUserInformation.php";
     public String URL_CHANGE_PASS                  = DOMAIN + "api/common/changePassword.php";
+    public String URL_LOAD_EVAL                    = DOMAIN + "api/common/loadEvaluationList.php";
 
     // RECOVER ACCOUNT
     public String URL_SEARCH_EMAIL                 = DOMAIN + "api/common/recoverAccount/searchEmail.php";

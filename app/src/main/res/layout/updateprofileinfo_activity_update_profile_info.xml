@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorBGSecondary"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.updateProfileInfo.updateProfileInfoActivity">
+
+    <!--App Bar/Title Bar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryLight"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_img_back" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Update Profile Information"
+                android:textAllCaps="false"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--MAIN-->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/colorBGPrimary"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/civProfPic"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:src="@drawable/main_default_user_img"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#63d7c0" />
+
+                    <Button
+                        android:id="@+id/btnRemovePhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_margin="30dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/main_btn_error"
+                        android:text="REMOVE PHOTO"
+                        android:textAllCaps="true"
+                        android:textColor="#f44336"
+                        android:textSize="16sp"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="7dp"
+                        android:text="First Name"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="14sp"
+                        android:id="@+id/tvFirstName"/>
+
+                    <EditText
+                        android:id="@+id/etFirstName"
+                        android:singleLine="true"
+                        android:inputType="textNoSuggestions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="7dp"
+                        android:text="Last Name"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="14sp"
+                        android:id="@+id/tvLastName"/>
+
+                    <EditText
+                        android:id="@+id/etLastName"
+                        android:singleLine="true"
+                        android:inputType="textNoSuggestions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="7dp"
+                        android:text="Address Line 1"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="14sp"
+                        android:id="@+id/tvAddress"/>
+
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:singleLine="true"
+                        android:inputType="textNoSuggestions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="7dp"
+                        android:text="City"
+                        android:textColor="@color/colorFontPrimary"
+                        android:textSize="14sp"
+                        android:id="@+id/tvCity"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actvCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="@color/colorFontPrimary"
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:ems="10"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/main_btn_bg"
+                android:text="Submit Changes"
+                android:textAllCaps="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

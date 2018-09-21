@@ -31,6 +31,8 @@ import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskOffers.taskO
 import com.example.benedictlutab.sidelinetg.modules.viewTaskerProfile.taskerProfileActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.sdsmdg.tastytoast.TastyToast;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -341,8 +343,8 @@ public class taskDetailsActivity extends AppCompatActivity
                         }
 
                         // Load task giver's prof pic.
-                        Picasso.with(taskDetailsActivity.this).load(apiRouteUtil.DOMAIN + jsonObject.getString("profile_picture")).
-                                fit().centerInside().into(civTaskGiverPhoto);
+                        Picasso.with(taskDetailsActivity.this).load(apiRouteUtil.DOMAIN + jsonObject.getString("profile_picture")).memoryPolicy(MemoryPolicy.NO_CACHE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE).fit().centerInside().into(civTaskGiverPhoto);
 
                         tvTaskTitle.setText(jsonObject.getString("title"));
                         tvTaskGiver.setText(jsonObject.getString("first_name") +" "+ jsonObject.getString("last_name"));
