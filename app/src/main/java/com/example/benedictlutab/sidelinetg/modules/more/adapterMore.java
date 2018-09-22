@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.modules.changePassword.changePasswordActivity;
+import com.example.benedictlutab.sidelinetg.modules.loadTaskHistory.taskHistoryActivity;
 import com.example.benedictlutab.sidelinetg.modules.updateProfileInfo.updateProfileInfoActivity;
 import com.example.benedictlutab.sidelinetg.modules.welcomeUser.entranceActivity;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -82,7 +83,8 @@ public class adapterMore extends RecyclerView.Adapter<adapterMore.ViewHolder>
             case 2:
                 break;
             case 3:
-
+                intent = new Intent(context, taskHistoryActivity.class);
+                context.startActivity(intent);
                 break;
             case 4:
                 Log.e("goToActivity: ", "SIGNED OUT!!");

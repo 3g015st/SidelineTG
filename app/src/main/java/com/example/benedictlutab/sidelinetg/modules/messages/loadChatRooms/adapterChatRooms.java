@@ -27,7 +27,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class adapterChatRooms extends RecyclerView.Adapter<adapterChatRooms.ViewHolder>
 {
-
     public Activity context;
     public List<ChatRoom> chatRoomList;
 

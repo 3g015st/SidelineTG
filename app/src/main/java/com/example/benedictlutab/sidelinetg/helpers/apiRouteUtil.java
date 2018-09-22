@@ -21,7 +21,6 @@ public class apiRouteUtil
     public String URL_MY_TASKS                     = DOMAIN + "api/taskgiver/myTasks.php";
     public String URL_TASK_OFFERS                  = DOMAIN + "api/taskgiver/fetchTaskOffers.php";
     public String URL_ASSIGN_TASKER                = DOMAIN + "api/taskgiver/assignTasker.php";
-    public String URL_LOAD_CHAT_ROOMS              = DOMAIN + "api/taskgiver/loadChatRooms.php";
     public String URL_ASSIGNED_TASKER              = DOMAIN + "api/taskgiver/fetchAssignedTasker.php";
     public String URL_MARK_COMPLETE                = DOMAIN + "api/taskgiver/markAsCompleted.php";
     public String URL_UPDATE_PROF_INFO             = DOMAIN + "api/taskgiver/updateProfileInformation.php";
@@ -35,6 +34,8 @@ public class apiRouteUtil
     public String URL_PROFILE_DETAILS              = DOMAIN + "api/common/loadUserInformation.php";
     public String URL_CHANGE_PASS                  = DOMAIN + "api/common/changePassword.php";
     public String URL_LOAD_EVAL                    = DOMAIN + "api/common/loadEvaluationList.php";
+    public String URL_FETCH_TASK_HISTORY           = DOMAIN + "api/common/fetchTaskHistory.php";
+    public String URL_LOAD_CHAT_ROOMS              = DOMAIN + "api/common/loadChatRooms.php";
 
     // RECOVER ACCOUNT
     public String URL_SEARCH_EMAIL                 = DOMAIN + "api/common/recoverAccount/searchEmail.php";

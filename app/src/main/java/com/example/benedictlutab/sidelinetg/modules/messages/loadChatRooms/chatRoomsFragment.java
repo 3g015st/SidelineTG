@@ -171,7 +171,8 @@ public class chatRoomsFragment extends Fragment
                 // Creating Map String Params.
                 Map<String, String> Parameter = new HashMap<String, String>();
 
-                Parameter.put("task_giver_id", USER_ID);
+                Parameter.put("USER_ID", USER_ID);
+                Parameter.put("ROLE", "Task Giver");
 
                 return Parameter;
             }
