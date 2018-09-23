@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBGSecondary"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.sendComplaintReport.complaintReportActivity">
+
+    <!--App Bar/Title Bar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryLight"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_img_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Report this tasker"
+                android:textAllCaps="true"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/colorFontPrimary"
+        android:textSize="14sp"
+        android:text="Complaint Reason: "
+        android:id="@+id/tvLabel1"/>
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/nsComplaintCategory"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/colorFontPrimary"
+        android:textSize="14sp"
+        android:text="Details: " />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#bdbdbd"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:counterEnabled="true"
+        app:counterMaxLength="40"
+        app:counterOverflowTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter.Exceed"
+        app:counterTextAppearance="@style/TextAppearance.App.TextInputLayout.Counter">
+        <EditText
+            android:id="@+id/etDetails"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="#eeeeee"
+            android:textSize="15dp"
+            android:inputType="textFilter"
+            android:maxLength="100"
+            android:singleLine="true"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="SEND COMPLAINT"
+        android:textColor="#eeeeee"
+        android:textSize="17sp"
+        android:background="@drawable/main_btn_bg"/>
+
+
+</LinearLayout>

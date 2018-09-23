@@ -60,4 +60,6 @@ dependencies {
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
     // Rating Bar
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.2'
+    // Nice Spinner
+    implementation 'com.github.arcadefire:nice-spinner:1.3.4'
 }

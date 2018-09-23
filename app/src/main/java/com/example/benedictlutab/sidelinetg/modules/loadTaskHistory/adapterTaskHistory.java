@@ -1,6 +1,7 @@
 package com.example.benedictlutab.sidelinetg.modules.loadTaskHistory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,6 +69,9 @@ public class adapterTaskHistory extends RecyclerView.Adapter<adapterTaskHistory.
             public void onClick(View v)
             {
                 Log.e("TASK ID: ", holder.TASK_ID);
+                Intent intent = new Intent(context, taskHistoryDetailsActivity.class);
+                intent.putExtra("TASK_ID", holder.TASK_ID);
+                context.startActivity(intent);
             }
         });
     }
