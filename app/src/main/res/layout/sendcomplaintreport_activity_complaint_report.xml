@@ -47,12 +47,12 @@
         android:layout_marginLeft="16dp"
         android:textColor="@color/colorFontPrimary"
         android:textSize="14sp"
-        android:text="Complaint Reason: "
-        android:id="@+id/tvLabel1"/>
+        android:text="Complaint Reason: " />
     <org.angmarch.views.NiceSpinner
         android:id="@+id/nsComplaintCategory"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:textSize="16sp"
+        android:layout_height="60dp"
         android:layout_margin="16dp"/>
 
     <TextView

@@ -38,6 +38,8 @@ public class apiRouteUtil
     public String URL_LOAD_CHAT_ROOMS              = DOMAIN + "api/common/loadChatRooms.php";
     public String URL_LOAD_TASK_HIST_DTLS          = DOMAIN + "api/common/loadTaskHistoryDetails.php";
     public String URL_SEND_EVAL                    = DOMAIN + "api/common/sendEvaluation.php";
+    public String URL_FETCH_COMP_CAT               = DOMAIN + "api/common/fetchComplaintCategories.php";
+    public String URL_SEND_COMPLAINT               = DOMAIN + "api/common/sendComplaint.php";
 
     // RECOVER ACCOUNT
     public String URL_SEARCH_EMAIL                 = DOMAIN + "api/common/recoverAccount/searchEmail.php";

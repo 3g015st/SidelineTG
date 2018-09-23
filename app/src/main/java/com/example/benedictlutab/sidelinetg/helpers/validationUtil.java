@@ -79,6 +79,18 @@ public class validationUtil
             return true;
     }
 
+    public boolean isValidComplaint(EditText text)
+    {
+        String complaint = text.getText().toString();
+
+        if(complaint.length() < 40)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
     public boolean isValidTaskDescription(EditText text)
     {
         String description = text.getText().toString();
@@ -107,4 +119,7 @@ public class validationUtil
         else
             return true;
     }
+
+
+
 }
