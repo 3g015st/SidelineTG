@@ -117,13 +117,13 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/tvCompleted"
+                            android:id="@+id/tvAverageRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvMemberSince"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="8dp"
-                            android:text="100 Completed | 4.5 Rating | 100% Completion Rate"
+                            android:text="0.0 Average Rating"
                             android:textColor="#fff"
                             android:textSize="13sp" />
                     </RelativeLayout>
@@ -135,6 +135,30 @@
                         android:layout_marginTop="25dp"
                         android:paddingBottom="100dp"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="#546E7A"
+                            android:clickable="true"
+                            android:elevation="10dp"
+                            android:padding="15dp"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textAllCaps="true"
+                            android:text="About Me" />
+
+                        <TextView
+                            android:id="@+id/tvShortBio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Short Bio Here"
+                            android:autoLink="web|email"
+                            android:linksClickable="true"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="fill_parent"
@@ -212,6 +236,14 @@
                             tools:layout_editor_absoluteX="745dp"
                             tools:layout_editor_absoluteY="-51dp">
                         </android.support.v7.widget.RecyclerView>
+                        <TextView
+                            android:id="@+id/tvNoLatestReviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="There are no latest reviews to be displayed."
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
                         <Button
                             android:id="@+id/btnViewReviews"
                             android:layout_width="match_parent"
@@ -251,24 +283,6 @@
 
             </android.support.v4.widget.NestedScrollView>
 
-            <!--REPORT THIS TASKER-->
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#455A64">
-
-                <TextView
-                    android:id="@+id/tvReport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1.0"
-                    android:text="Report this tasker"
-                    android:textAllCaps="true"
-                    android:textColor="#ef5350"
-                    android:textSize="19sp" />
-            </android.support.design.widget.AppBarLayout>
 
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

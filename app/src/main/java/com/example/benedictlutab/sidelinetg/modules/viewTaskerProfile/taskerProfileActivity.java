@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
+import com.example.benedictlutab.sidelinetg.models.Evaluation;
 import com.example.benedictlutab.sidelinetg.models.Skill;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails.taskDetailsActivity;
 import com.squareup.picasso.Picasso;
@@ -54,9 +55,19 @@ public class taskerProfileActivity extends AppCompatActivity
     @BindView(R.id.tvGender) TextView tvGender;
     @BindView(R.id.tvAge) TextView tvAge;
 
+    @BindView(R.id.tvShortBio) TextView tvShortBio;
+    @BindView(R.id.tvAverageRating) TextView tvAverageRating;
+    @BindView(R.id.tvNoLatestReviews) TextView tvNoLatestReviews;
+
     @BindView(R.id.rv_skills) RecyclerView rvSkills;
     private List<Skill> skillList = new ArrayList<>();
     private adapterDisplaySkills adapterDisplaySkills;
+
+    @BindView(R.id.rv_featuredrevs) RecyclerView rv_featuredrevs;
+    private List<Evaluation> evaluationList = new ArrayList<>();
+    private adapterLatestEval adapterLatestEval;
+
+    private int lsEval;
 
     private int lsSkills;
 
@@ -92,6 +103,7 @@ public class taskerProfileActivity extends AppCompatActivity
                 // Fetching data from server
                 fetchTaskerDetails();
                 fetchSkills();
+                fetchEvalList();
 
             }
         });
@@ -106,6 +118,7 @@ public class taskerProfileActivity extends AppCompatActivity
                 // Fetching data from server
                 fetchTaskerDetails();
                 fetchSkills();
+                fetchEvalList();
 
                 swipeRefLayout.setRefreshing(false);
             }
@@ -180,6 +193,9 @@ public class taskerProfileActivity extends AppCompatActivity
                         tvCity.setText(jsonObject.getString("city")+ " City");
                         tvAge.setText(jsonObject.getString("age")+" years old");
                         tvGender.setText(jsonObject.getString("gender"));
+
+                        tvShortBio.setText(jsonObject.getString("short_bio"));
+                        tvAverageRating.setText(jsonObject.getString("avg_rating") +" "+ "Average Rating");
                     }
                 }
                 catch (JSONException e)
@@ -264,6 +280,92 @@ public class taskerProfileActivity extends AppCompatActivity
                 Map<String, String> Parameter = new HashMap<String, String>();
 
                 Parameter.put("tasker_id", USER_ID);
+
+                return Parameter;
+            }
+        };
+
+        // Add the StringRequest to Queue.
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
+
+    private void initrvEval()
+    {
+        Log.d("initrvEval: ", String.valueOf(lsEval));
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_featuredrevs.setLayoutManager(layoutManager);
+
+        adapterLatestEval = new adapterLatestEval(getApplicationContext(), evaluationList);
+        rv_featuredrevs.setAdapter(adapterLatestEval);
+
+        if (lsEval == 0)
+        {
+            Log.d("initRecyclerView: ", "GONE-VISIBLE");
+            rv_featuredrevs.setVisibility(View.GONE);
+            tvNoLatestReviews.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.d("initRecyclerView: ", "VISIBLE-GONE");
+            rv_featuredrevs.setVisibility(View.VISIBLE);
+            tvNoLatestReviews.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void fetchEvalList()
+    {
+        Log.e("fetchEvalList: ", "STARTED!");
+        evaluationList.clear();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOAD_EVAL, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String ServerResponse)
+            {
+                try
+                {
+                    Log.e("SERVER RESPONSE: ", ServerResponse);
+                    JSONArray jsonArray = new JSONArray(ServerResponse);
+                    for(int x = 0; x < jsonArray.length(); x++)
+                    {
+                        JSONObject jsonObject = jsonArray.getJSONObject(x);
+                        // Adding the jsonObject to the List.
+                        evaluationList.add(new Evaluation(jsonObject.getString("full_name"),
+                                jsonObject.getString("profile_picture"),
+                                jsonObject.getString("review"),
+                                jsonObject.getString("date_time_sent"),
+                                jsonObject.getString("rating"),
+                                jsonObject.getString("title")));
+                        lsEval = evaluationList.size();
+                        Log.e("lsEval: ", String.valueOf(lsEval));
+                    }
+                    initrvEval();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("Catch Response: ", e.toString());
+                }
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        Log.e("Error Response: ", volleyError.toString());
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+
+                Parameter.put("receiver_id", USER_ID);
 
                 return Parameter;
             }
