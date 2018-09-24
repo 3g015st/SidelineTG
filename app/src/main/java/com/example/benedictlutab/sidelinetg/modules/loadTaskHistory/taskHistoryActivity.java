@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,8 +40,10 @@ public class taskHistoryActivity extends AppCompatActivity
 {
     @BindView(R.id.rv_taskhistory) RecyclerView rv_taskhistory;
     @BindView(R.id.btnBack) Button btnBack;
-    @BindView(R.id.swipeRefLayout_id)
-    SwipeRefreshLayout swipeRefLayout;
+    @BindView(R.id.swipeRefLayout_id) SwipeRefreshLayout swipeRefLayout;
+
+    @BindView(R.id.llShow) LinearLayout llShow;
+    @BindView(R.id.llEmpty) LinearLayout llEmpty;
 
     private LinearLayoutManager layoutManager;
 
@@ -97,12 +100,14 @@ public class taskHistoryActivity extends AppCompatActivity
         if (listSize == 0)
         {
             Log.e("initRecyclerView: ", "GONE-VISIBLE");
-            rv_taskhistory.setVisibility(View.GONE);
+            llShow.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
         }
         else
         {
             Log.e("initRecyclerView: ", "VISIBLE-GONE");
-            rv_taskhistory.setVisibility(View.VISIBLE);
+            llShow.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
         }
     }
 
