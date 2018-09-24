@@ -91,6 +91,9 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         //Bind fetched image url from server
         Picasso.with(context).load(holder.IMAGE_URL).fit().centerInside().into(holder.civTaskerPhoto);
 
+        holder.SERVICE_CHARGE = offer.getService_charge();
+        holder.TOTAL_AMOUNT = Float.parseFloat(holder.amount) + Float.parseFloat(holder.SERVICE_CHARGE);
+
         holder.llAccept.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -101,7 +104,8 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
 
                 // Show alert dialog (ACCEPT OR NOT)
                 new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("ARE YOU SURE?")
-                        .setContentText(" Do you want to accept the offer and assign " + holder.tvTaskerName.getText().toString() +" for this task? ")
+                        .setContentText(" Do you want to accept the offer and assign " + holder.tvTaskerName.getText().toString() +" for this task? - " + "NOTE:  The total task fee for this task shall be PHP " +
+                                 holder.TOTAL_AMOUNT + ", this includes a service charge of PHP " + holder.SERVICE_CHARGE +".")
                         .setCancelText(" CANCEL ")
                         .setConfirmText(" ASSIGN ")
                         .showCancelButton(true)
@@ -156,7 +160,8 @@ public class adapterDisplayOffers extends RecyclerView.Adapter<adapterDisplayOff
         @BindView(R.id.civTaskerPhoto) CircleImageView civTaskerPhoto;
         @BindView(R.id.llAccept) LinearLayout llAccept;
 
-        private String TASK_ID, TASKER_ID, IMAGE_URL, amount;
+        private String TASK_ID, TASKER_ID, IMAGE_URL, amount, SERVICE_CHARGE;
+        private Float TOTAL_AMOUNT;
 
         public ViewHolder(final View itemView)
         {

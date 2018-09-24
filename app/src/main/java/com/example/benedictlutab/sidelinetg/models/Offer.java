@@ -6,9 +6,9 @@ package com.example.benedictlutab.sidelinetg.models;
 
 public class Offer
 {
-    private String task_id, tasker_id, profile_picture, first_name, last_name, amount, message;
+    private String task_id, tasker_id, profile_picture, first_name, last_name, amount, message, service_charge;
 
-    public Offer(String task_id, String tasker_id, String profile_picture, String first_name, String last_name, String amount,  String message)
+    public Offer(String task_id, String tasker_id, String profile_picture, String first_name, String last_name, String amount,  String message, String service_charge)
     {
         this.task_id = task_id;
         this.tasker_id = tasker_id;
@@ -17,6 +17,7 @@ public class Offer
         this.last_name = last_name;
         this.amount = amount;
         this.message = message;
+        this.service_charge = service_charge;
     }
 
     public String getTask_id() {
@@ -45,5 +46,9 @@ public class Offer
 
     public String getProfile_picture() {
         return profile_picture;
+    }
+
+    public String getService_charge() {
+        return service_charge;
     }
 }

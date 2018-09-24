@@ -176,7 +176,8 @@ public class taskOffersActivity extends AppCompatActivity
                                 jsonObject.getString("first_name"),
                                 jsonObject.getString("last_name"),
                                 jsonObject.getString("amount"),
-                                jsonObject.getString("message"))
+                                jsonObject.getString("message"),
+                                jsonObject.getString("comm_fee"))
                         );
                         listSize = offerList.size();
                         Log.e("listSize: ", String.valueOf(listSize));
