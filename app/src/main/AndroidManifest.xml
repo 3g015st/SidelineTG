@@ -71,6 +71,7 @@
         <activity android:name=".modules.loadTaskHistory.taskHistoryActivity" />
         <activity android:name=".modules.updateProfileInfo.updateProfileInfoActivity" />
         <activity android:name=".modules.loadTaskHistory.taskHistoryDetailsActivity" />
+        <activity android:name=".modules.viewEvaluation.evaluationActivity" />
         <activity android:name=".modules.sendComplaintReport.complaintReportActivity"></activity>
     </application>
 

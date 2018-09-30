@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorBGSecondary"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.viewEvaluation.evaluationActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--App Bar/Title Bar-->
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimaryLight"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/main_img_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:text="All Evaluation"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorFontPrimary"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeRefLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llShow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--HORIZONTAL BAR CHART-->
+            <RelativeLayout
+                android:orientation="vertical"
+                android:background="#37474f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:layout_margin="10sp"
+                    android:id="@+id/bcEvaluation"
+                    android:layout_width="match_parent"
+                    android:layout_height="350sp">
+                </com.github.mikephil.charting.charts.HorizontalBarChart>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorBGPrimary" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_evaluation"
+                android:overScrollMode="never">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <!--IF EMPTY-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/llEmpty">
+            <ImageView
+                android:layout_marginTop="25dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:background="@drawable/main_img_eval"/>
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Sorry, there are no evaluation available :("
+                android:textSize="16sp"
+                android:textColor="@color/colorFontPrimary"
+                android:layout_gravity="top"
+                android:layout_marginTop="15dp"
+                android:layout_margin="35dp"/>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>
+</LinearLayout>

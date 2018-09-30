@@ -2,6 +2,7 @@ package com.example.benedictlutab.sidelinetg.modules.more;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.benedictlutab.sidelinetg.R;
+import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.modules.changePassword.changePasswordActivity;
 import com.example.benedictlutab.sidelinetg.modules.loadTaskHistory.taskHistoryActivity;
@@ -81,6 +83,9 @@ public class adapterMore extends RecyclerView.Adapter<adapterMore.ViewHolder>
                 context.startActivity(intent);
                 break;
             case 2:
+                apiRouteUtil apiRouteUtil = new apiRouteUtil();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(apiRouteUtil.URL_TERMS));
+                context.startActivity(browserIntent);
                 break;
             case 3:
                 intent = new Intent(context, taskHistoryActivity.class);

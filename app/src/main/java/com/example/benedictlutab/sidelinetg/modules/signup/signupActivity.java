@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -97,7 +98,7 @@ public class signupActivity extends AppCompatActivity
         loadCities();
     }
 
-    @OnClick({R.id.etBirthdate, R.id.btnSubmit, R.id.btnBack})
+    @OnClick({R.id.etBirthdate, R.id.btnSubmit, R.id.btnBack, R.id.etTerms})
     public void setViewOnClickEvent(View view)
     {
         switch(view.getId())
@@ -110,6 +111,11 @@ public class signupActivity extends AppCompatActivity
                 break;
             case R.id.btnBack:
                 this.finish();
+                break;
+            case R.id.etTerms:
+                apiRouteUtil apiRouteUtil = new apiRouteUtil();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(apiRouteUtil.URL_TERMS));
+                startActivity(browserIntent);
                 break;
         }
     }

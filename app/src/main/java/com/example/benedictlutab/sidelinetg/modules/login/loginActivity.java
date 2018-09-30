@@ -66,6 +66,7 @@ public class loginActivity extends AppCompatActivity
         etRecoverAccount.setFocusable(false);
     }
 
+
     private void changeFontFamily()
     {
         // Change Font Style.

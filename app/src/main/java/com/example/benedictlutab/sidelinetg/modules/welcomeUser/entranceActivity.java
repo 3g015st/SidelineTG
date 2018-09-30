@@ -9,6 +9,7 @@ import android.content.pm.Signature;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,10 +98,17 @@ public class entranceActivity extends AppCompatActivity
             case R.id.btnLogin:
                 Intent intent_login = new Intent(entranceActivity.this, loginActivity.class);
                 startActivity(intent_login);
+                this.finish();
                 break;
             case R.id.btnSignup:
                 Intent intent_su = new Intent(entranceActivity.this, signupActivity.class);
                 startActivity(intent_su);
+                this.finish();
+                break;
+            case R.id.etTerms:
+                apiRouteUtil apiRouteUtil = new apiRouteUtil();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(apiRouteUtil.URL_TERMS));
+                startActivity(browserIntent);
                 break;
         }
     }

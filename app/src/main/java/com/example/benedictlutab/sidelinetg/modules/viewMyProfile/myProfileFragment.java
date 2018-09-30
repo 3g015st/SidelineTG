@@ -2,6 +2,7 @@ package com.example.benedictlutab.sidelinetg.modules.viewMyProfile;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
 import com.example.benedictlutab.sidelinetg.models.Evaluation;
 import com.example.benedictlutab.sidelinetg.modules.more.moreFragment;
+import com.example.benedictlutab.sidelinetg.modules.viewEvaluation.evaluationActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewTaskerProfile.taskerProfileActivity;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -299,6 +301,7 @@ public class myProfileFragment extends Fragment
                 Map<String, String> Parameter = new HashMap<String, String>();
 
                 Parameter.put("receiver_id", USER_ID);
+                Parameter.put("SWITCH", "LATEST");
 
                 return Parameter;
             }
@@ -306,5 +309,12 @@ public class myProfileFragment extends Fragment
 
         // Add the StringRequest to Queue.
         Volley.newRequestQueue(getActivity()).add(stringRequest);
+    }
+
+    @OnClick(R.id.btnViewReviews)
+    public void viewEval()
+    {
+        Intent intent = new Intent(getActivity(), evaluationActivity.class);
+        startActivity(intent);
     }
 }
