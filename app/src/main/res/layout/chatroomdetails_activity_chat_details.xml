@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGSecondary"
+    android:orientation="vertical"
+    tools:context="com.example.benedictlutab.sidelinetg.modules.messages.chatRoomDetails.chatDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/ablTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:elevation="0dp"
+        android:background="@color/colorPrimaryLight">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_img_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Task Title"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:id="@+id/tvTitle"/>
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--TASKER DETAILS-->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvTaskerDetails"
+        android:layout_below="@+id/ablTitle"
+        android:backgroundTint="#37474f"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:padding="10sp"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civTaskerPhoto"
+                android:layout_margin="10dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/main_img_person"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#ef5350"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="17sp"
+                android:textSize="25sp"
+                android:textColor="#ef5350"
+                android:text="Tasker Name"
+                android:textAllCaps="true"
+                android:id="@+id/tvTaskerName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="13sp"
+                    android:textColor="#b0bec5"
+                    android:text="Assigned tasker for this task." />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--CHAT MESSAGES-->
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/cvTaskerDetails"
+        android:layout_above="@id/llSendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_messages"
+        android:layout_gravity="center|top"
+        android:overScrollMode="never">
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:background="#37474f"
+        android:id="@+id/llSendMessage"
+        android:elevation="10sp"
+        android:layout_alignParentBottom="true"
+        android:padding="10sp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/etMessage"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.8"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="#eeeeee"
+            android:textSize="15dp"
+            android:inputType="textFilter"
+            android:singleLine="true"/>
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_weight="0"
+            android:background="@drawable/main_img_send"
+            android:layout_width="35sp"
+            android:layout_height="35sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

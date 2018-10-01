@@ -72,7 +72,8 @@
         <activity android:name=".modules.updateProfileInfo.updateProfileInfoActivity" />
         <activity android:name=".modules.loadTaskHistory.taskHistoryDetailsActivity" />
         <activity android:name=".modules.viewEvaluation.evaluationActivity" />
-        <activity android:name=".modules.sendComplaintReport.complaintReportActivity"></activity>
+        <activity android:name=".modules.sendComplaintReport.complaintReportActivity" />
+        <activity android:name=".modules.messages.chatRoomDetails.chatDetailsActivity"></activity>
     </application>
 
 </manifest>

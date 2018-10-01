@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="left"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBGSecondary"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    android:id="@+id/llMessage">
+
+    <com.daasuu.bl.BubbleLayout
+        android:id="@+id/bblMessage"
+        android:layout_margin="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:bl_arrowDirection="left"
+        app:bl_arrowHeight="8dp"
+        app:bl_arrowPosition="12dp"
+        app:bl_arrowWidth="8dp"
+        app:bl_bubbleColor="@color/colorAccent"
+        app:bl_cornersRadius="8dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvMessage"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:text="Insert message here"
+                android:textColor="@color/colorBGSecondary" />
+            <TextView
+                android:id="@+id/tvDateSent"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:text="Insert message here"
+                android:textColor="#424242" />
+        </LinearLayout>
+
+    </com.daasuu.bl.BubbleLayout>
+
+</LinearLayout>
