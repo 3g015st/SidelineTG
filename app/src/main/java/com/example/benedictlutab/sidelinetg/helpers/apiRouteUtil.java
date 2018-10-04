@@ -26,6 +26,7 @@ public class apiRouteUtil
     public String URL_UPDATE_PROF_INFO             = DOMAIN + "api/taskgiver/updateProfileInformation.php";
 
     public String URL_TASKER_SKILLS                = DOMAIN + "api/tasker/mySkills.php";
+    public String URL_LOAD_BADGE                   = DOMAIN + "api/tasker/loadBadges.php";
 
     public String URL_TASK_DETAILS                 = DOMAIN + "api/common/fetchTaskDetails.php";
     public String URL_CANCEL_TASK                  = DOMAIN + "api/common/cancelTask.php";

@@ -8,7 +8,7 @@
     tools:context="com.example.benedictlutab.sidelinetg.modules.viewEvaluation.evaluationActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -43,6 +43,35 @@
                     android:textSize="19sp" />
             </LinearLayout>
         </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
+
+
+    <!--IF EMPTY-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/llEmpty">
+        <ImageView
+            android:layout_marginTop="25dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:background="@drawable/main_img_eval"/>
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Sorry, there are no evaluation available :("
+            android:textSize="16sp"
+            android:textColor="@color/colorFontPrimary"
+            android:layout_gravity="top"
+            android:layout_marginTop="15dp"
+            android:layout_margin="35dp"/>
+    </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,6 +82,7 @@
         <LinearLayout
             android:id="@+id/llShow"
             android:layout_width="match_parent"
+            android:visibility="visible"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -86,35 +116,6 @@
 
         </LinearLayout>
 
-        <!--IF EMPTY-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:visibility="gone"
-            android:id="@+id/llEmpty">
-            <ImageView
-                android:layout_marginTop="25dp"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:layout_gravity="center"
-                android:background="@drawable/main_img_eval"/>
-            <TextView
-                android:id="@+id/tvEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Sorry, there are no evaluation available :("
-                android:textSize="16sp"
-                android:textColor="@color/colorFontPrimary"
-                android:layout_gravity="top"
-                android:layout_marginTop="15dp"
-                android:layout_margin="35dp"/>
-        </LinearLayout>
-
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</LinearLayout>
 </LinearLayout>

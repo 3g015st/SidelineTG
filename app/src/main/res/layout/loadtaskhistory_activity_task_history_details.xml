@@ -276,7 +276,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:text="Evaluate your task giver"
+                            android:text="Evaluate your tasker"
                             android:textColor="@color/colorFontPrimary"
                             android:textSize="15sp" />
 

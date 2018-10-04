@@ -1,5 +1,6 @@
 package com.example.benedictlutab.sidelinetg.modules.viewTaskerProfile;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,9 +21,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
+import com.example.benedictlutab.sidelinetg.models.Badge;
 import com.example.benedictlutab.sidelinetg.models.Evaluation;
 import com.example.benedictlutab.sidelinetg.models.Skill;
 import com.example.benedictlutab.sidelinetg.modules.myTasks.viewTaskDetails.taskDetailsActivity;
+import com.example.benedictlutab.sidelinetg.modules.viewEvaluation.evaluationActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -58,6 +62,9 @@ public class taskerProfileActivity extends AppCompatActivity
     @BindView(R.id.tvShortBio) TextView tvShortBio;
     @BindView(R.id.tvAverageRating) TextView tvAverageRating;
     @BindView(R.id.tvNoLatestReviews) TextView tvNoLatestReviews;
+    @BindView(R.id.tvNoBadges) TextView tvNoBadges;
+
+    @BindView(R.id.btnViewReviews) Button btnViewReviews;
 
     @BindView(R.id.rv_skills) RecyclerView rvSkills;
     private List<Skill> skillList = new ArrayList<>();
@@ -70,6 +77,13 @@ public class taskerProfileActivity extends AppCompatActivity
     private int lsEval;
 
     private int lsSkills;
+
+    @BindView(R.id.rv_badges) RecyclerView rvBadges;
+    private List<Badge> badgeList = new ArrayList<>();
+    private adapterBadges adapterBadges;
+
+    private int lsBadges;
+
 
     final apiRouteUtil apiRouteUtil = new apiRouteUtil();
 
@@ -104,6 +118,7 @@ public class taskerProfileActivity extends AppCompatActivity
                 fetchTaskerDetails();
                 fetchSkills();
                 fetchEvalList();
+                fetchBadges();
 
             }
         });
@@ -119,6 +134,7 @@ public class taskerProfileActivity extends AppCompatActivity
                 fetchTaskerDetails();
                 fetchSkills();
                 fetchEvalList();
+                fetchBadges();
 
                 swipeRefLayout.setRefreshing(false);
             }
@@ -310,7 +326,7 @@ public class taskerProfileActivity extends AppCompatActivity
         {
             Log.d("initRecyclerView: ", "VISIBLE-GONE");
             rv_featuredrevs.setVisibility(View.VISIBLE);
-            tvNoLatestReviews.setVisibility(View.VISIBLE);
+            tvNoLatestReviews.setVisibility(View.GONE);
         }
     }
 
@@ -366,6 +382,7 @@ public class taskerProfileActivity extends AppCompatActivity
                 Map<String, String> Parameter = new HashMap<String, String>();
 
                 Parameter.put("receiver_id", USER_ID);
+                Parameter.put("SWITCH", "LATEST");
 
                 return Parameter;
             }
@@ -373,5 +390,98 @@ public class taskerProfileActivity extends AppCompatActivity
 
         // Add the StringRequest to Queue.
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
+
+    private void initrvBadges()
+    {
+        Log.d("initrvBadges: ", String.valueOf(lsBadges));
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvBadges.setLayoutManager(layoutManager);
+
+        adapterBadges = new adapterBadges(this, badgeList);
+        rvBadges.setAdapter(adapterBadges);
+
+        if (lsBadges == 0)
+        {
+            Log.e("initRecyclerView: ", "GONE-VISIBLE");
+            rvBadges.setVisibility(View.GONE);
+            tvNoBadges.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.e("initRecyclerView: ", "VISIBLE-GONE");
+            rvBadges.setVisibility(View.VISIBLE);
+            tvNoBadges.setVisibility(View.GONE);
+        }
+    }
+
+    private void fetchBadges()
+    {
+        Log.e("fetchBadges: ", "STARTED!");
+        badgeList.clear();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOAD_BADGE, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String ServerResponse)
+            {
+                try
+                {
+                    Log.e("SERVER RESPONSE: ", ServerResponse);
+                    JSONArray jsonArray = new JSONArray(ServerResponse);
+                    for(int x = 0; x < jsonArray.length(); x++)
+                    {
+                        JSONObject jsonObject = jsonArray.getJSONObject(x);
+                        // Adding the jsonObject to the List.
+                        badgeList.add(new Badge(jsonObject.getString("badge_id"),
+                                jsonObject.getString("name"),
+                                jsonObject.getString("description"),
+                                jsonObject.getString("image")));
+                        lsBadges = badgeList.size();
+                        Log.e("lsBadges: ", String.valueOf(lsBadges));
+                    }
+                    initrvBadges();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("Catch Response: ", e.toString());
+                }
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        Log.e("Error Response: ", volleyError.toString());
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Creating Map String Params.
+                Map<String, String> Parameter = new HashMap<String, String>();
+
+                Parameter.put("tasker_id", USER_ID);
+
+                return Parameter;
+            }
+        };
+
+        // Add the StringRequest to Queue.
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+
+    @OnClick(R.id.btnViewReviews)
+    public void viewEval()
+    {
+        Intent intent = new Intent(this, evaluationActivity.class);
+        intent.putExtra("USER_ID", USER_ID);
+        startActivity(intent);
     }
 }

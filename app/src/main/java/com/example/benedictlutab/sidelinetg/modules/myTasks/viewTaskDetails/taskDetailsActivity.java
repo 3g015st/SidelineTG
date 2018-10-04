@@ -352,9 +352,21 @@ public class taskDetailsActivity extends AppCompatActivity
                         tvTaskAddress.setText(jsonObject.getString("line_one") +", "+ jsonObject.get("city"));
                         tvTaskDueDate.setText(jsonObject.getString("due_date"));
                         tvTaskCategory.setText(jsonObject.getString("category_name"));
-                        tvTaskFee.setText("PHP " + jsonObject.getString("task_fee"));
+
 
                         TASK_STATUS = jsonObject.getString("status");
+
+                        if(TASK_STATUS.equals("AVAILABLE"))
+                        {
+                            Log.e("TASL FEE:", "NO COMM FEE");
+                            tvTaskFee.setText("PHP " + jsonObject.getString("task_fee"));
+                        }
+                        else
+                        {
+                            Log.e("TASL FEE:", "WITH COMM FEE");
+                            Float OVERALL_FEE = Float.parseFloat(jsonObject.getString("task_fee")) + Float.parseFloat(jsonObject.getString("comm_fee")) ;
+                            tvTaskFee.setText("PHP " + String.valueOf(OVERALL_FEE));
+                        }
 
                         triggerVisibility(TASK_STATUS);
 

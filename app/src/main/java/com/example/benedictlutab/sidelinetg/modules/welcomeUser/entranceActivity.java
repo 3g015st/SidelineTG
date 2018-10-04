@@ -98,12 +98,10 @@ public class entranceActivity extends AppCompatActivity
             case R.id.btnLogin:
                 Intent intent_login = new Intent(entranceActivity.this, loginActivity.class);
                 startActivity(intent_login);
-                this.finish();
                 break;
             case R.id.btnSignup:
                 Intent intent_su = new Intent(entranceActivity.this, signupActivity.class);
                 startActivity(intent_su);
-                this.finish();
                 break;
             case R.id.etTerms:
                 apiRouteUtil apiRouteUtil = new apiRouteUtil();

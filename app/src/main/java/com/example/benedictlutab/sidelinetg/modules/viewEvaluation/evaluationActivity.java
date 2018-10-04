@@ -179,6 +179,7 @@ public class evaluationActivity extends AppCompatActivity
     {
         Log.e("fetchEvalList: ", "STARTED!");
         evaluationList.clear();
+        lsEval = 0;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_LOAD_EVAL, new Response.Listener<String>()
         {

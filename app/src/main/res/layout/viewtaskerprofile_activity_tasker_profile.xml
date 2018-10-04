@@ -80,7 +80,7 @@
                         android:elevation="5dp"
                         android:padding="20dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/main_img_profile"
+                        android:src="@drawable/main_img_person"
                         app:civ_border_color="#ef5350"
                         app:civ_border_width="1dp"/>
 
@@ -123,7 +123,7 @@
                             android:layout_below="@+id/tvMemberSince"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="8dp"
-                            android:text="0.0 Average Rating"
+                            android:text="4.5 Average Rating "
                             android:textColor="#fff"
                             android:textSize="13sp" />
                     </RelativeLayout>
@@ -173,6 +173,50 @@
                             android:textAllCaps="true"
                             android:text="Details" />
 
+                        <!--CITY-->
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="testingemail@gmail.com"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/colorBGPrimary" />
+                        <!--CITY-->
+                        <TextView
+                            android:id="@+id/tvMobileNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="+639091297712"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/colorBGPrimary" />
+                        <TextView
+                            android:id="@+id/tvLineOne"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Sta. Mesa"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/colorBGPrimary" />
                         <!--CITY-->
                         <TextView
                             android:id="@+id/tvCity"
@@ -277,6 +321,39 @@
                             tools:layout_editor_absoluteX="745dp"
                             tools:layout_editor_absoluteY="-51dp">
                         </android.support.v7.widget.RecyclerView>
+
+                        <!--BADGES-->
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="#546E7A"
+                            android:clickable="true"
+                            android:elevation="10dp"
+                            android:padding="15dp"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorFontPrimary"
+                            android:textAllCaps="true"
+                            android:text="BADGES" />
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/rv_badges"
+                            android:layout_gravity="center|top"
+                            android:overScrollMode="never"
+                            android:layout_marginTop="5dp"
+                            tools:layout_editor_absoluteX="745dp"
+                            tools:layout_editor_absoluteY="-51dp">
+                        </android.support.v7.widget.RecyclerView>
+
+                        <TextView
+                            android:id="@+id/tvNoBadges"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="There are no badges to be displayed."
+                            android:textColor="@color/colorFontPrimary"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
                 </RelativeLayout>
