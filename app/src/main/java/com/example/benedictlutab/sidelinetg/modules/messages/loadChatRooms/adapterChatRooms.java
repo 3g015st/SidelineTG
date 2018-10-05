@@ -98,7 +98,7 @@ public class adapterChatRooms extends RecyclerView.Adapter<adapterChatRooms.View
                     public void onClick(View v)
                     {
                         // If chat room exists go to the room
-                        if(dataSnapshot.child(holder.TASK_ID).exists())
+                        if(dataSnapshot.hasChild(holder.TASK_ID))
                         {
                             Log.e("ROOM: ", "EXISTS");
                             Intent intent = new Intent(context, chatDetailsActivity.class);

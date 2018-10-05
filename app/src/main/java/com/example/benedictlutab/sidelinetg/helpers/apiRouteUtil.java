@@ -9,9 +9,9 @@ public class apiRouteUtil
     // Set domain
 //    public String DOMAIN = "http://192.168.0.101/Sideline/admin_area/";
 //    public String DOMAIN = "http://169.254.253.97/Sideline/";
-//    public String DOMAIN = "http://192.168.43.218/Sideline/admin_area/";
+    public String DOMAIN = "http://192.168.43.218/Sideline/admin_area/";
 //    public String DOMAIN = "http://192.168.0.36/Sideline/";
-    public String DOMAIN = "http://192.168.1.9/Sideline/admin_area/";
+//    public String DOMAIN = "http://192.168.1.9/Sideline/admin_area/";
 
     // Routes
     public String URL_CHECK_EMAIL_MOBILE_EXISTS    = DOMAIN + "api/taskgiver/isEmailOrMobileExists.php";

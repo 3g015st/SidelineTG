@@ -555,7 +555,7 @@ public class postTaskActivity extends AppCompatActivity
             }
         };
         StringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
+                15000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
