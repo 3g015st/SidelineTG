@@ -87,6 +87,16 @@ public class recoverAccountActivity extends AppCompatActivity
         boolean ERROR_COUNT = false;
         validationUtil validationUtil = new validationUtil();
 
+        //Hide button
+        btnSearch.setVisibility(View.GONE);
+
+        // Init loading dialog.
+        final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        swalDialog.setTitleText(" ");
+        swalDialog.setContentText("Please wait while we searching for your email.");
+        swalDialog.setCancelable(false);
+
         // Validate fields before passing data to REST API.
         if(!validationUtil.isValidEmail(etEmail))
         {
@@ -110,11 +120,14 @@ public class recoverAccountActivity extends AppCompatActivity
                             if(RESPONSE_CODE.equals("EXISTS"))
                             {
                                 EMAIL = etEmail.getText().toString();
+                                swalDialog.hide();
                                 sendVerificationCode();
                             }
                             else
                             {
                                 TastyToast.makeText(recoverAccountActivity.this, "Email does not exists!",TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
+                                btnSearch.setVisibility(View.VISIBLE);
+                                swalDialog.hide();
                             }
                         }
                     },
@@ -125,6 +138,8 @@ public class recoverAccountActivity extends AppCompatActivity
                         {
                             // Showing error message if something goes wrong.
                             Log.e("Error Response:", volleyError.toString());
+                            btnSearch.setVisibility(View.VISIBLE);
+                            swalDialog.hide();
                         }
                     })
             {
@@ -145,6 +160,9 @@ public class recoverAccountActivity extends AppCompatActivity
 
             // Send the StringRequest to the requestQueue.
             requestQueue.add(StringRequest);
+
+            // Display progress dialog.
+            swalDialog.show();
         }
     }
 

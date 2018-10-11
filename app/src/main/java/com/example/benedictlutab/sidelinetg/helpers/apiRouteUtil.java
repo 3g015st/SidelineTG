@@ -7,7 +7,7 @@ package com.example.benedictlutab.sidelinetg.helpers;
 public class apiRouteUtil
 {
     // Set domain
-//    public String DOMAIN = "http://192.168.0.101/Sideline/admin_area/";
+//    public String DOMAIN = "http://192.168.0.102/Sideline/admin_area/";
 //    public String DOMAIN = "http://169.254.253.97/Sideline/";
     public String DOMAIN = "http://192.168.43.218/Sideline/admin_area/";
 //    public String DOMAIN = "http://192.168.0.36/Sideline/";

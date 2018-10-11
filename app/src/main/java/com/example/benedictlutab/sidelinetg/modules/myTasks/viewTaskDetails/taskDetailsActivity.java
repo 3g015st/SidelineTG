@@ -492,6 +492,9 @@ public class taskDetailsActivity extends AppCompatActivity
         swalDialog.setTitleText("");
         swalDialog.setCancelable(false);
 
+        //Hide button for the mean time
+        btnMarkComplete.setVisibility(View.GONE);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiRouteUtil.URL_MARK_COMPLETE, new Response.Listener<String>()
         {
             @Override
@@ -505,6 +508,10 @@ public class taskDetailsActivity extends AppCompatActivity
                     {
                         Log.e("markTaskCompleted:", "TASK IS COMPLETED!!!");
                         TastyToast.makeText(getApplicationContext(), "Task successfully completed!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+
+                        //Show button
+                        btnMarkComplete.setVisibility(View.VISIBLE);
+
                         showPromptTaskCompleted();
                     }
                 }
@@ -512,6 +519,10 @@ public class taskDetailsActivity extends AppCompatActivity
                 {
                     e.printStackTrace();
                     Log.e("Catch Response: ", e.toString());
+
+                    //Show button
+                    btnMarkComplete.setVisibility(View.VISIBLE);
+
                     swalDialog.hide();
                 }
             }
@@ -522,6 +533,10 @@ public class taskDetailsActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError volleyError)
                     {
                         Log.e("ERROR RESPONSE: ", volleyError.toString());
+
+                        //Show button
+                        btnMarkComplete.setVisibility(View.VISIBLE);
+
                         swalDialog.hide();
                     }
                 })

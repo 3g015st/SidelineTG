@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
 import com.example.benedictlutab.sidelinetg.helpers.fontStyleCrawler;
+import com.example.benedictlutab.sidelinetg.helpers.swalDialogUtil;
 import com.example.benedictlutab.sidelinetg.modules.login.loginActivity;
 import com.example.benedictlutab.sidelinetg.modules.signup.signupActivity;
 import com.example.benedictlutab.sidelinetg.modules.viewHome.homeActivity;
@@ -132,13 +133,14 @@ public class entranceActivity extends AppCompatActivity
 
     private void checkServerConnection()
     {
-        Log.e("checkServerConn:", "START!");
+        Log.e("checkServerConn: ", "START!");
+
         // Disable buttons first.
         btnLogin.setEnabled(false);
         btnSignup.setEnabled(false);
 
-        // Get route obj.
         apiRouteUtil apiRouteUtil = new apiRouteUtil();
+        final swalDialogUtil swalDialogUtil = new swalDialogUtil(entranceActivity.this);
 
         final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -155,10 +157,10 @@ public class entranceActivity extends AppCompatActivity
                         Log.e("RESPONSE: ", ServerResponse);
 
                         // If there is no connection to server,
-                        if(ServerResponse.equals("ERROR"))
+                        if(ServerResponse.replaceAll("\\s+","").equals("ERROR"))
                         {
                             swalDialog.hide();
-                           showNetworkError();
+                            swalDialogUtil.showNetworkErrorDialog();
                         }
                         else
                         {
@@ -175,44 +177,24 @@ public class entranceActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError volleyError)
                     {
                         // Showing error message if something goes wrong.
-                        Log.e("Error Response:", volleyError.toString());
+                        Log.e("onErrorResponse: ", volleyError.toString());
                         swalDialog.hide();
-                        showNetworkError();
+                        swalDialogUtil.showNetworkErrorDialog();
                     }
                 })
         {
             @Override
             protected Map<String, String> getParams()
             {
-                // Creating Map String Params.
                 Map<String, String> Parameter = new HashMap<String, String>();
-                // Sending all registration fields to 'Parameter'.
                 Parameter.put("request", REQUEST);
                 return Parameter;
             }
         };
-        // Initialize requestQueue.
         RequestQueue requestQueue = Volley.newRequestQueue(entranceActivity.this);
-        // Send the StringRequest to the requestQueue.
         requestQueue.add(StringRequest);
 
         swalDialog.show();
-    }
-
-    private void showNetworkError()
-    {
-        Log.e("showNetworkError:", "START!");
-        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Network Error").setContentText("It seems there is a problem in our servers please try again later :(")
-                .setConfirmText("OK")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
-                {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        // Exit application.
-                        finish();
-                    }
-                })
-                .show();
     }
 }
 

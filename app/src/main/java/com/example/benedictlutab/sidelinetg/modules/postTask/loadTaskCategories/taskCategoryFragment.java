@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.benedictlutab.sidelinetg.R;
 import com.example.benedictlutab.sidelinetg.helpers.apiRouteUtil;
+import com.example.benedictlutab.sidelinetg.helpers.swalDialogUtil;
 import com.example.benedictlutab.sidelinetg.models.taskCategory;
 
 import org.json.JSONArray;
@@ -111,25 +112,39 @@ public class taskCategoryFragment extends Fragment
                 try
                 {
                     Log.e("SERVER RESPONSE: ", ServerResponse);
-                    JSONArray jsonArray = new JSONArray(ServerResponse);
-                    for(int x = 0; x < jsonArray.length(); x++)
+                    if(ServerResponse.replaceAll("\\s+","").equals("FAILED_CONN"))
                     {
-                        JSONObject jsonObject = jsonArray.getJSONObject(x);
-                        // Adding the jsonObject to the List.
-                        taskCategoryList.add(new taskCategory(jsonObject.getString("task_category_id"),
-                                                              jsonObject.getString("name"),
-                                                              jsonObject.getString("minimum_payment"),
-                                                              jsonObject.getString("task_category_img"))
-                                             );
-                        listSize = taskCategoryList.size();
-                        Log.e("listSize: ", String.valueOf(listSize));
+                        Log.e("fetchTaskCategories: ", "FAILED_CONN");
+                        swalDialogUtil swalDialogUtil = new swalDialogUtil(getActivity());
+                        swalDialogUtil.showNetworkErrorDialog();
+
+                        // Hide task categories layout
+                        llShow.setVisibility(View.GONE);
+                        llEmpty.setVisibility(View.VISIBLE);
                     }
-                    initRecyclerView();
+                    else
+                    {
+                        JSONArray jsonArray = new JSONArray(ServerResponse);
+                        for(int x = 0; x < jsonArray.length(); x++)
+                        {
+                            JSONObject jsonObject = jsonArray.getJSONObject(x);
+                            // Adding the jsonObject to the List.
+                            taskCategoryList.add(new taskCategory(jsonObject.getString("task_category_id"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getString("minimum_payment"),
+                                    jsonObject.getString("task_category_img"))
+                            );
+                            listSize = taskCategoryList.size();
+                            Log.e("listSize: ", String.valueOf(listSize));
+                        }
+                        initRecyclerView();
+                    }
                 }
                 catch (JSONException e)
                 {
                     e.printStackTrace();
                     Log.e("Catch Response: ", e.toString());
+
                 }
             }
         },
@@ -139,6 +154,7 @@ public class taskCategoryFragment extends Fragment
                     public void onErrorResponse(VolleyError volleyError)
                     {
                         Log.e("Error Response: ", volleyError.toString());
+
                     }
                 });
         // Add the StringRequest to Queue.

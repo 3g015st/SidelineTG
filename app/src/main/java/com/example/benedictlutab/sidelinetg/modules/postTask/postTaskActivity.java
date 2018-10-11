@@ -457,6 +457,7 @@ public class postTaskActivity extends AppCompatActivity
         // Init loading dialog.
         final SweetAlertDialog swalDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         swalDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        swalDialog.setTitleText(" ");
         swalDialog.setContentText("Please wait while we are posting your task :)");
         swalDialog.setCancelable(false);
 
